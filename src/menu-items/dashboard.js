@@ -36,73 +36,24 @@ const dashboard = {
             breadcrumbs: false
         },
         {
-            id: 'Masters',
-            title: 'Masters',
+            id: 'Leave',
+            title: 'Leave',
             type: 'collapse',
             icon: icons.TeamOutlined,
             breadcrumbs: false,
             children: [
                 {
-                    id: 'KYC',
-                    title: 'KYC',
+                    id: 'ApplyLeave',
+                    title: 'Apply Leave',
                     type: 'item',
                     url: '/kyc',
                     breadcrumbs: false
                 },
                 {
-                    id: 'Banks',
-                    title: 'Banks',
+                    id: 'LeaveHistory',
+                    title: 'LeaveHistory',
                     type: 'item',
                     url: '/banks',
-                    breadcrumbs: false
-                },
-                {
-                    id: 'Countries',
-                    title: 'Countries',
-                    type: 'item',
-                    url: '/countries',
-                    breadcrumbs: false
-                },
-                {
-                    id: 'Counties',
-                    title: 'Counties',
-                    type: 'item',
-                    url: '/counties',
-                    breadcrumbs: false
-                },
-                {
-                    id: 'SubCounties',
-                    title: 'SubCounties',
-                    type: 'item',
-                    url: '/subcounties',
-                    breadcrumbs: false
-                },
-                {
-                    id: 'Locations ',
-                    title: 'Locations ',
-                    type: 'item',
-                    url: '/locations',
-                    breadcrumbs: false
-                },
-                {
-                    id: 'Localities ',
-                    title: 'Localities ',
-                    type: 'item',
-                    url: '/localities',
-                    breadcrumbs: false
-                },
-                {
-                    id: 'Regions ',
-                    title: 'Regions ',
-                    type: 'item',
-                    url: '/regions',
-                    breadcrumbs: false
-                },
-                {
-                    id: 'Products',
-                    title: 'Products',
-                    type: 'item',
-                    url: '/',
                     breadcrumbs: false
                 }
             ]

@@ -5,11 +5,10 @@ import Loadable from 'components/Loadable';
 import MainLayout from 'layout/MainLayout';
 
 import UsersPage from 'pages/users/index';
-import LocationsPage from 'pages/locations/index';
+import LeavesPage from 'pages/applyLeave/index';
 import CountriesPage from 'pages/countries/index';
 
 import CountiesPage from 'pages/counties/index';
-import LocalitiesPage from 'pages/localities/index';
 import SubCountiesPage from 'pages/subCounties/index';
 import RegionsPage from 'pages/regions/index';
 import RolesPage from 'pages/roles/index';
@@ -38,25 +37,16 @@ const MainRoutes = {
             private: true
         },
         {
-            path: 'kyc',
-            element: <KYCPage />,
-            private: true
-        },
-        {
             path: 'users',
             element: <UsersPage />,
             private: true
         },
         {
-            path: 'locations',
-            element: <LocationsPage />,
+            path: 'leave',
+            element: <LeavesPage />,
             private: true
         },
-        {
-            path: 'localities',
-            element: <LocalitiesPage />,
-            private: true
-        },
+
         {
             path: 'countries',
             element: <CountriesPage />,
@@ -70,11 +60,6 @@ const MainRoutes = {
         {
             path: 'subcounties',
             element: <SubCountiesPage />,
-            private: true
-        },
-        {
-            path: 'banks',
-            element: <BanksPage />,
             private: true
         },
         {

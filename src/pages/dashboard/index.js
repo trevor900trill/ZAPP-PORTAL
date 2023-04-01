@@ -118,16 +118,16 @@ const DashboardDefault = () => {
                 <Typography variant="h5">Dashboard</Typography>
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
-                <AnalyticEcommerce title="Total Clients" count="42,236" percentage={59.3} extra="35,000" />
+                <AnalyticEcommerce title="All Applied Leave" count="5" />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
-                <AnalyticEcommerce title="Premiums this mth" count="$78,250" percentage={70.5} extra="8,900" />
+                <AnalyticEcommerce title="Approved Leave(s)" count="3" />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
-                <AnalyticEcommerce title="Active clients" count="18,800" percentage={27.4} isLoss color="error" extra="1,943" />
+                <AnalyticEcommerce title="Pending" count="1" />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
-                <AnalyticEcommerce title="Money transfer" count="$35,078" percentage={27.4} isLoss color="error" extra="$20,395" />
+                <AnalyticEcommerce title="Rejected" count="0" percentage={27.4} isLoss color="error" extra="$20,395" />
             </Grid>
 
             <Grid item md={8} sx={{ display: { sm: 'none', md: 'block', lg: 'none' } }} />
@@ -183,7 +183,7 @@ const DashboardDefault = () => {
                     </Box>
                     <MonthlyBarChart />
                 </MainCard>
-            </Grid> */}
+            </Grid> }
 
             {/* row 3 */}
             <Grid item xs={12} md={12} lg={12}>
@@ -238,10 +238,6 @@ const DashboardDefault = () => {
                                     {...a11yProps(3)}
                                 />
                             </Tabs>
-
-                            <Button sx={{ width: '100%' }} variant="contained" startIcon={<DiffOutlined />}>
-                                Create New Quote
-                            </Button>
                         </Stack>
                     </Box>
                 ) : (
@@ -268,7 +264,7 @@ const DashboardDefault = () => {
                                             alignItems: 'center',
                                             textTransform: 'capitalize'
                                         }}
-                                        label="Active"
+                                        label="Approved"
                                         {...a11yProps(1)}
                                     />
                                     <Tab
@@ -290,7 +286,7 @@ const DashboardDefault = () => {
                                             alignItems: 'center',
                                             textTransform: 'capitalize'
                                         }}
-                                        label="Drafts"
+                                        label="Rejected"
                                         {...a11yProps(3)}
                                     />
                                 </Tabs>

@@ -34,7 +34,7 @@ const AddCountries = ({ close }) => {
                 initialValues={{
                     tenant: user.tenantid,
                     createdBy: user.email,
-                    modifiedBy: user.email,
+                    modifiedBy: user.e,
                     modifiedOn: getCurrentTime(),
                     isDeleted: false,
                     countryCode: '',

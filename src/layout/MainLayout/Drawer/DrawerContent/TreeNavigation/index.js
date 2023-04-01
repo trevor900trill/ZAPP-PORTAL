@@ -129,118 +129,62 @@ const TreeNavigation = () => {
                     navigatePage('/');
                 }}
             />
-            <StyledTreeItem nodeId="2" labelText="Masters" labelIcon={IdcardOutlined} color="#e3742f" bgColor="#fcefe3">
-                <StyledTreeItem nodeId="21" labelText="Quick Settings" labelIcon={SettingOutlined}>
+            <StyledTreeItem nodeId="2" labelText="Leave" labelIcon={IdcardOutlined} color="#e3742f" bgColor="#fcefe3">
+                {/* <StyledTreeItem nodeId="21" labelText="Leave" labelIcon={SettingOutlined}>
                     <StyledTreeItem
                         nodeId="213"
-                        labelText="Countries"
+                        labelText="Apply Leave"
                         color="#e3742f"
                         bgColor="#fcefe3"
                         onClick={() => {
-                            navigatePage('/countries');
+                            navigatePage('/ApplyLeave');
                         }}
                     />
                     <StyledTreeItem
                         nodeId="211"
-                        labelText="Counties"
+                        labelText="Leave History"
                         color="#e3742f"
                         bgColor="#fcefe3"
                         onClick={() => {
                             navigatePage('/counties');
                         }}
                     />
-                    <StyledTreeItem
-                        nodeId="212"
-                        labelText="Sub-Counties"
-                        color="#e3742f"
-                        bgColor="#fcefe3"
-                        onClick={() => {
-                            navigatePage('/subcounties');
-                        }}
-                    />
-                    <StyledTreeItem
-                        nodeId="214"
-                        labelText="Locations"
-                        color="#e3742f"
-                        bgColor="#fcefe3"
-                        onClick={() => {
-                            navigatePage('/locations');
-                        }}
-                    />
-                    <StyledTreeItem
-                        nodeId="216"
-                        labelText="City Codes"
-                        color="#e3742f"
-                        bgColor="#fcefe3"
-                        onClick={() => {
-                            navigatePage('/localities');
-                        }}
-                    />
-                    <StyledTreeItem
-                        nodeId="217"
-                        labelText="Regions"
-                        color="#e3742f"
-                        bgColor="#fcefe3"
-                        onClick={() => {
-                            navigatePage('/regions');
-                        }}
-                    />
-                    <StyledTreeItem
-                        nodeId="218"
-                        labelText="Banks"
-                        color="#e3742f"
-                        bgColor="#fcefe3"
-                        onClick={() => {
-                            navigatePage('/banks');
-                        }}
-                    />
-                    <StyledTreeItem nodeId="219" labelText="Geo Structure" color="#e3742f" bgColor="#fcefe3" />
-                    <StyledTreeItem nodeId="2110" labelText="Gender Masters" color="#e3742f" bgColor="#fcefe3" />
-                    <StyledTreeItem nodeId="2111" labelText="Industry Sector" color="#e3742f" bgColor="#fcefe3" />
-                    <StyledTreeItem nodeId="2112" labelText="Professions Master" color="#e3742f" bgColor="#fcefe3" />
-                    <StyledTreeItem nodeId="2113" labelText="SMI Master" color="#e3742f" bgColor="#fcefe3" />
-                    <StyledTreeItem nodeId="2114" labelText="Acceptable Id Types" color="#e3742f" bgColor="#fcefe3" />
-                    <StyledTreeItem nodeId="2115" labelText="Hazardous Materials" color="#e3742f" bgColor="#fcefe3" />
-                </StyledTreeItem>
-                <StyledTreeItem nodeId="22" labelText="Configuration" labelIcon={SlidersOutlined} color="#e3742f" bgColor="#fcefe3" />
-                <StyledTreeItem nodeId="23" labelText="User Groups" labelIcon={TeamOutlined} color="#e3742f" bgColor="#fcefe3" />
-                <StyledTreeItem nodeId="24" labelText="Ratings" labelIcon={StarOutlined} color="#e3742f" bgColor="#fcefe3" />
-                <StyledTreeItem nodeId="25" labelText="Document Setup" labelIcon={FolderOpenOutlined} color="#e3742f" bgColor="#fcefe3" />
-                <StyledTreeItem nodeId="26" labelText="Merketing" labelIcon={LineChartOutlined} color="#e3742f" bgColor="#fcefe3" />
+                </StyledTreeItem> */}
                 <StyledTreeItem
-                    nodeId="27"
-                    labelText="Claims Master"
-                    labelIcon={SafetyCertificateOutlined}
+                    nodeId="22"
+                    labelText="Apply Leave"
+                    labelIcon={SlidersOutlined}
                     color="#e3742f"
                     bgColor="#fcefe3"
+                    onClick={() => {
+                        navigatePage('/ApplyLeave');
+                    }}
+                />
+                <StyledTreeItem
+                    nodeId="23"
+                    labelText="Leave History"
+                    labelIcon={TeamOutlined}
+                    color="#e3742f"
+                    bgColor="#fcefe3"
+                    onClick={() => {
+                        navigatePage('/ApplyLeave');
+                    }}
+                />
+                <StyledTreeItem
+                    nodeId="23"
+                    labelText="Staff"
+                    labelIcon={TeamOutlined}
+                    color="#e3742f"
+                    bgColor="#fcefe3"
+                    onClick={() => {
+                        navigatePage('/ApplyLeave');
+                    }}
                 />
             </StyledTreeItem>
-            <StyledTreeItem nodeId="3" labelText="Underwriting" labelIcon={ReadOutlined} color="#e3742f" bgColor="#fcefe3">
-                <StyledTreeItem nodeId="31" labelText="Quotations" labelIcon={DotChartOutlined}>
-                    <StyledTreeItem
-                        nodeId="311"
-                        labelText="Motor"
-                        color="#e3742f"
-                        bgColor="#fcefe3"
-                        onClick={() => {
-                            navigatePage('/kyc');
-                        }}
-                    />
-                    <StyledTreeItem nodeId="312" labelText="Fire" color="#e3742f" bgColor="#fcefe3" />
-                    <StyledTreeItem nodeId="313" labelText="Theft" color="#e3742f" bgColor="#fcefe3" />
-                    <StyledTreeItem nodeId="314" labelText="Liability" color="#e3742f" bgColor="#fcefe3" />
-                    <StyledTreeItem nodeId="315" labelText="Engineering" color="#e3742f" bgColor="#fcefe3" />
-                    <StyledTreeItem nodeId="316" labelText="Marine" color="#e3742f" bgColor="#fcefe3" />
-                    <StyledTreeItem nodeId="317" labelText="General" color="#e3742f" bgColor="#fcefe3" />
-                    <StyledTreeItem nodeId="318" labelText="Miscellaneous" color="#e3742f" bgColor="#fcefe3" />
-                    <StyledTreeItem nodeId="319" labelText="Business Package" color="#e3742f" bgColor="#fcefe3" />
-                </StyledTreeItem>
-                <StyledTreeItem nodeId="32" labelText="New Policy" labelIcon={SlidersOutlined} color="#e3742f" bgColor="#fcefe3" />
-                <StyledTreeItem nodeId="33" labelText="Endorsement" labelIcon={WalletOutlined} color="#e3742f" bgColor="#fcefe3" />
+            <StyledTreeItem nodeId="3" labelText="PayRoll" labelIcon={ReadOutlined} color="#e3742f" bgColor="#fcefe3">
+                <StyledTreeItem nodeId="32" labelText="Payslips" labelIcon={SlidersOutlined} color="#e3742f" bgColor="#fcefe3" />
+                <StyledTreeItem nodeId="33" labelText="Update Information" labelIcon={WalletOutlined} color="#e3742f" bgColor="#fcefe3" />
             </StyledTreeItem>
-            <StyledTreeItem nodeId="4" labelText="Claims" labelIcon={CarOutlined} color="#e3742f" bgColor="#fcefe3" />
-            <StyledTreeItem nodeId="5" labelText="Reinsurance" labelIcon={SyncOutlined} color="#e3742f" bgColor="#fcefe3" />
-            <StyledTreeItem nodeId="6" labelText="Finance" labelIcon={DollarOutlined} color="#e3742f" bgColor="#fcefe3" />
         </TreeView>
     );
 };
