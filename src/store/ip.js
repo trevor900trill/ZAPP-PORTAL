@@ -1,4 +1,4 @@
-export const url = 'https://lm.qwikpace.com/api';
+export const url = 'https://lm.qwikpace.com/api/v1';
 
 //export const url = 'http://a90689165673642adb46ae8886bc24b2-989850680.us-east-2.elb.amazonaws.com/api';
 

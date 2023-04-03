@@ -54,16 +54,40 @@ function stableSort(array, comparator) {
 
 const headCells = [
     {
-        id: 'countyName',
+        id: 'leaveType',
         align: 'left',
         disablePadding: false,
-        label: 'County Name'
+        label: 'Leave Type'
     },
     {
-        id: 'countyCode',
+        id: 'dateFrom',
         align: 'left',
         disablePadding: true,
-        label: 'County Code'
+        label: 'Date From'
+    },
+    {
+        id: 'dateTo',
+        align: 'left',
+        disablePadding: true,
+        label: 'Date To'
+    },
+    {
+        id: 'noOfDays',
+        align: 'left',
+        disablePadding: true,
+        label: 'Number of Days'
+    },
+    {
+        id: 'hodStatus',
+        align: 'left',
+        disablePadding: true,
+        label: 'HOD Status'
+    },
+    {
+        id: 'hrStatus',
+        align: 'left',
+        disablePadding: true,
+        label: 'HR Status'
     }
 ];
 
@@ -96,9 +120,7 @@ OrderTableHead.propTypes = {
     orderBy: PropTypes.string
 };
 
-// ==============================|| ORDER TABLE ||============================== //
-
-const ApplyLeave = ({ rows, modalOpen }) => {
+const LeaveHistory = ({ rows, modalOpen }) => {
     const [order] = useState('asc');
     const [selected] = useState([]);
     const [page, setPage] = useState(0);
@@ -108,7 +130,6 @@ const ApplyLeave = ({ rows, modalOpen }) => {
     function createData(countyName, countyCode, regionId, id) {
         return {
             countyName,
-
             countyCode,
             regionId,
             id
@@ -171,20 +192,6 @@ const ApplyLeave = ({ rows, modalOpen }) => {
                                         >
                                             <TableCell align="left">{row.countryName}</TableCell>
                                             <TableCell align="left">{row.countryCode}</TableCell>
-                                            <TableCell align="left">
-                                                <Stack direction="row" alignItems="center" spacing={1}>
-                                                    <Button
-                                                        disableElevation
-                                                        variant="outlined"
-                                                        size="medium"
-                                                        onClick={() => {
-                                                            modalOpen(row);
-                                                        }}
-                                                    >
-                                                        Edit
-                                                    </Button>{' '}
-                                                </Stack>
-                                            </TableCell>
                                         </TableRow>
                                     );
                                 })

@@ -46,7 +46,7 @@ const dashboard = {
                     id: 'ApplyLeave',
                     title: 'Apply Leave',
                     type: 'item',
-                    url: '/kyc',
+                    url: '/leave',
                     breadcrumbs: false
                 },
                 {

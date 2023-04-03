@@ -59,40 +59,34 @@ function stableSort(array, comparator) {
 
 const headCells = [
     {
-        id: 'clientName',
+        id: 'staffName',
         align: 'left',
         disablePadding: false,
-        label: 'Client Name.'
+        label: 'Staff Name.'
     },
     {
-        id: 'businessName',
+        id: 'leaveType',
         align: 'left',
         disablePadding: true,
-        label: 'Business Name'
+        label: 'Leave Type'
     },
     {
-        id: 'coverages',
+        id: 'appliedDate',
         align: 'left',
         disablePadding: false,
-        label: 'Coverages'
+        label: 'Applied Date'
     },
     {
-        id: 'expiration',
+        id: 'hodStatus',
         align: 'left',
         disablePadding: false,
-        label: 'Expiration'
+        label: 'HOD Status'
     },
     {
-        id: 'premium',
+        id: 'hrStatus',
         align: 'left',
         disablePadding: false,
-        label: 'Premium'
-    },
-    {
-        id: 'status',
-        align: 'left',
-        disablePadding: false,
-        label: 'Status'
+        label: 'HR Status'
     },
     {
         id: 'action',

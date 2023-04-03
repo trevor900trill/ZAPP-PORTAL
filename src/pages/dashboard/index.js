@@ -127,7 +127,7 @@ const DashboardDefault = () => {
                 <AnalyticEcommerce title="Pending" count="1" />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
-                <AnalyticEcommerce title="Rejected" count="0" percentage={27.4} isLoss color="error" extra="$20,395" />
+                <AnalyticEcommerce title="Rejected" count="0" />
             </Grid>
 
             <Grid item md={8} sx={{ display: { sm: 'none', md: 'block', lg: 'none' } }} />
@@ -290,15 +290,6 @@ const DashboardDefault = () => {
                                         {...a11yProps(3)}
                                     />
                                 </Tabs>
-                            </Grid>
-
-                            <Grid item>
-                                <Stack direction="row" alignItems="center" spacing={1}>
-                                    <Search />
-                                    <Button sx={{ width: '100%' }} variant="contained" startIcon={<DiffOutlined />}>
-                                        Create New Quote
-                                    </Button>
-                                </Stack>
                             </Grid>
                         </Grid>
                     </Box>

@@ -5,7 +5,7 @@ import Loadable from 'components/Loadable';
 import MainLayout from 'layout/MainLayout';
 
 import UsersPage from 'pages/users/index';
-import LeavesPage from 'pages/applyLeave/index';
+import PostApplyLeaveForm from 'pages/applyLeave/forms/PostApplyLeaveForm.js';
 import CountriesPage from 'pages/countries/index';
 
 import CountiesPage from 'pages/counties/index';
@@ -43,7 +43,7 @@ const MainRoutes = {
         },
         {
             path: 'leave',
-            element: <LeavesPage />,
+            element: <PostApplyLeaveForm />,
             private: true
         },
 

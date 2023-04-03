@@ -43,8 +43,7 @@ const PostApplyLeaveForm = ({ close }) => {
                 }}
                 validationSchema={Yup.object().shape({
                     StartLeaveDate: Yup.string().max(255).required('Start Leave Date is required'),
-                    EndLeaveDate: Yup.string().max(255).required('End Leave Date is required'),
-                    LeaveType: Yup.string().max(255).required('Leave Type is required')
+                    EndLeaveDate: Yup.string().max(255).required('End Leave Date is required')
                 })}
                 onSubmit={async (values, { setErrors, setStatus, setSubmitting, resetForm }) => {
                     try {
@@ -77,103 +76,155 @@ const PostApplyLeaveForm = ({ close }) => {
                 {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values, setFieldValue }) => (
                     <form noValidate onSubmit={handleSubmit}>
                         <Grid container spacing={3}>
-                            <Grid item xs={12} md={12}>
+                            <Grid item xs={12} md={6}>
                                 <Stack spacing={1}>
-                                    <InputLabel htmlFor="countyName-signup">Full Names</InputLabel>
+                                    <InputLabel htmlFor="firstName">First Name</InputLabel>
                                     <OutlinedInput
-                                        id="countyName-login"
-                                        type="fullNames"
-                                        value={values.countyName}
-                                        name="fullNames"
+                                        id="firstName"
+                                        type="text"
+                                        value={values.firstName}
+                                        name="firstName"
                                         onBlur={handleBlur}
                                         onChange={handleChange}
                                         fullWidth
-                                        error={Boolean(touched.countyName && errors.countyName)}
+                                        error={Boolean(touched.firstName && errors.firstName)}
+                                        disabled={true}
                                     />
                                 </Stack>
                             </Grid>
-                            <Grid item xs={12} md={12}>
+                            <Grid item xs={12} md={6}>
+                                <Stack spacing={1}>
+                                    <InputLabel htmlFor="lastName">Last Name</InputLabel>
+                                    <OutlinedInput
+                                        id="lastName"
+                                        type="text"
+                                        value={values.lastName}
+                                        name="lastName"
+                                        onBlur={handleBlur}
+                                        onChange={handleChange}
+                                        fullWidth
+                                        error={Boolean(touched.lastName && errors.lastName)}
+                                        disabled={true}
+                                    />
+                                </Stack>
+                            </Grid>
+                            <Grid item xs={12} md={6}>
                                 <Stack spacing={1}>
                                     <InputLabel htmlFor="email">Email</InputLabel>
                                     <OutlinedInput
                                         fullWidth
                                         id="email"
                                         type="email"
-                                        value={values.countyCode}
+                                        value={values.email}
                                         name="email"
                                         onBlur={handleBlur}
                                         onChange={handleChange}
                                         inputProps={{}}
+                                        disabled={true}
                                     />
                                 </Stack>
                             </Grid>
-                            <Grid item xs={12} md={12}>
+                            <Grid item xs={12} md={6}>
                                 <Stack spacing={1}>
-                                    <InputLabel htmlFor="regionId-signup">Leave Type</InputLabel>
-                                    <Select
-                                        labelId="leaveType"
-                                        id="leaveTypeId-select"
-                                        name="leaveTypeId"
-                                        error={Boolean(touched.regionId && errors.regionId)}
-                                        value={values.regionId}
+                                    <InputLabel htmlFor="email">Department</InputLabel>
+                                    <OutlinedInput
+                                        fullWidth
+                                        id="deparment"
+                                        type="deparment"
+                                        value={values.deparment}
+                                        name="deparment"
+                                        onBlur={handleBlur}
                                         onChange={handleChange}
-                                    >
-                                        {regions.regionsReponse.map((oneRegion) => {
-                                            return (
-                                                <MenuItem value={oneRegion.id} key={oneRegion.id}>
-                                                    {oneRegion.regionName}
-                                                </MenuItem>
-                                            );
-                                        })}
-                                    </Select>
-                                    {touched.regionId && errors.regionId && (
-                                        <FormHelperText error id="helper-text-company-signup">
-                                            {errors.regionId}
-                                        </FormHelperText>
-                                    )}
+                                        inputProps={{}}
+                                        disabled={true}
+                                    />
                                 </Stack>
                             </Grid>
 
-                            <Grid item xs={12} md={12}>
+                            <Grid item xs={12} md={6}>
                                 <Stack spacing={1}>
-                                    <InputLabel htmlFor="countyCode-signup">Start Date</InputLabel>
+                                    <InputLabel htmlFor="startDate">Start Date</InputLabel>
                                     <OutlinedInput
                                         fullWidth
-                                        error={Boolean(touched.countyCode && errors.countyCode)}
-                                        id="countyCode-signup"
-                                        type="startDate"
-                                        value={values.countyCode}
+                                        id="startDate"
+                                        type="date"
+                                        value={values.startDate}
                                         name="startDate"
                                         onBlur={handleBlur}
                                         onChange={handleChange}
-                                        inputProps={{}}
+                                        inputProps={{ min: new Date().toISOString().slice(0, 10) }}
+                                        error={Boolean(touched.startDate && errors.startDate)}
                                     />
-                                    {touched.countyCode && errors.countyCode && (
-                                        <FormHelperText error id="helper-text-countyCode-signup">
-                                            {errors.countyCode}
+                                    {touched.startDate && errors.startDate && (
+                                        <FormHelperText error id="helper-text-startDate">
+                                            {errors.startDate}
                                         </FormHelperText>
                                     )}
                                 </Stack>
                             </Grid>
 
-                            <Grid item xs={12} md={12}>
+                            <Grid item xs={12} md={6}>
                                 <Stack spacing={1}>
-                                    <InputLabel htmlFor="countyCode-signup">End Date</InputLabel>
+                                    <InputLabel htmlFor="startDate">End Date</InputLabel>
                                     <OutlinedInput
                                         fullWidth
-                                        error={Boolean(touched.endDate && errors.endDate)}
-                                        type="endDate"
-                                        value={values.endDate}
-                                        name="endDate"
+                                        id="endDate"
+                                        type="date"
+                                        value={values.startDate}
+                                        name="startDate"
                                         onBlur={handleBlur}
                                         onChange={handleChange}
-                                        inputProps={{}}
+                                        inputProps={{ min: new Date().toISOString().slice(0, 10) }}
+                                        error={Boolean(touched.startDate && errors.startDate)}
                                     />
-                                    {touched.countyCode && errors.countyCode && (
-                                        <FormHelperText error id="helper-text-countyCode-signup">
-                                            {errors.countyCode}
+                                    {touched.startDate && errors.startDate && (
+                                        <FormHelperText error id="helper-text-startDate">
+                                            {errors.startDate}
                                         </FormHelperText>
                                     )}
+                                </Stack>
+                            </Grid>
+
+                            <Grid item xs={12} md={6}>
+                                <Stack spacing={1}>
+                                    <InputLabel htmlFor="leaveType">Leave Type</InputLabel>
+                                    <Select
+                                        labelId="leaveType"
+                                        id="leaveType"
+                                        name="leaveType"
+                                        error={Boolean(touched.leaveType && errors.leaveType)}
+                                        value={values.leaveType}
+                                        onChange={handleChange}
+                                        fullWidth
+                                    >
+                                        {/* {leaveTypes.map((type) => (
+                                            <MenuItem key={type} value={type}>
+                                                {type}
+                                            </MenuItem>
+                                        ))} */}
+                                    </Select>
+                                    {touched.leaveType && errors.leaveType && (
+                                        <FormHelperText error id="helper-text-leaveType">
+                                            {errors.leaveType}
+                                        </FormHelperText>
+                                    )}
+                                </Stack>
+                            </Grid>
+
+                            <Grid item xs={12} md={6}>
+                                <Stack spacing={1}>
+                                    <InputLabel htmlFor="availableDays">Available Days</InputLabel>
+                                    <OutlinedInput
+                                        fullWidth
+                                        id="availableDays"
+                                        type="number"
+                                        value={values.availableDays}
+                                        name="availableDays"
+                                        onBlur={handleBlur}
+                                        onChange={handleChange}
+                                        inputProps={{ min: '0', max: '365' }}
+                                        disabled={true}
+                                    />
                                 </Stack>
                             </Grid>
 
@@ -183,14 +234,13 @@ const PostApplyLeaveForm = ({ close }) => {
                                     <OutlinedInput
                                         fullWidth
                                         error={Boolean(touched.reason && errors.reason)}
-                                        id="countyCode-signup"
+                                        id="reason"
                                         type="reason"
                                         value={values.reason}
                                         name="reason"
                                         onBlur={handleBlur}
                                         onChange={handleChange}
                                         placeholder="Leave reason"
-                                        inputProps={{}}
                                     />
                                     {touched.countyCode && errors.countyCode && (
                                         <FormHelperText error id="helper-text-countyCode-signup">
@@ -219,7 +269,7 @@ const PostApplyLeaveForm = ({ close }) => {
                                     <Button onClick={close}>Cancel</Button>
                                     <AnimateButton>
                                         <Button disableElevation disabled={isSubmitting} type="submit" variant="contained" color="primary">
-                                            Add County
+                                            Apply
                                         </Button>
                                     </AnimateButton>
                                 </Stack>
