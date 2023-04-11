@@ -130,54 +130,44 @@ const TreeNavigation = () => {
                 }}
             />
             <StyledTreeItem nodeId="2" labelText="Leave" labelIcon={IdcardOutlined} color="#e3742f" bgColor="#fcefe3">
-                {/* <StyledTreeItem nodeId="21" labelText="Leave" labelIcon={SettingOutlined}>
-                    <StyledTreeItem
-                        nodeId="213"
-                        labelText="Apply Leave"
-                        color="#e3742f"
-                        bgColor="#fcefe3"
-                        onClick={() => {
-                            navigatePage('/ApplyLeave');
-                        }}
-                    />
-                    <StyledTreeItem
-                        nodeId="211"
-                        labelText="Leave History"
-                        color="#e3742f"
-                        bgColor="#fcefe3"
-                        onClick={() => {
-                            navigatePage('/counties');
-                        }}
-                    />
-                </StyledTreeItem> */}
                 <StyledTreeItem
-                    nodeId="22"
+                    nodeId="21"
                     labelText="Apply Leave"
                     labelIcon={SlidersOutlined}
                     color="#e3742f"
                     bgColor="#fcefe3"
                     onClick={() => {
-                        navigatePage('/ApplyLeave');
+                        navigatePage('/leave');
                     }}
                 />
                 <StyledTreeItem
-                    nodeId="23"
+                    nodeId="22"
                     labelText="Leave History"
                     labelIcon={TeamOutlined}
                     color="#e3742f"
                     bgColor="#fcefe3"
                     onClick={() => {
-                        navigatePage('/ApplyLeave');
+                        navigatePage('/leave');
                     }}
                 />
                 <StyledTreeItem
                     nodeId="23"
+                    labelText="Leave Types"
+                    labelIcon={TeamOutlined}
+                    color="#e3742f"
+                    bgColor="#fcefe3"
+                    onClick={() => {
+                        navigatePage('/leaveTypes');
+                    }}
+                />
+                <StyledTreeItem
+                    nodeId="24"
                     labelText="Staff"
                     labelIcon={TeamOutlined}
                     color="#e3742f"
                     bgColor="#fcefe3"
                     onClick={() => {
-                        navigatePage('/ApplyLeave');
+                        navigatePage('/leave');
                     }}
                 />
             </StyledTreeItem>

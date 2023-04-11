@@ -5,7 +5,7 @@ import Loadable from 'components/Loadable';
 import MainLayout from 'layout/MainLayout';
 
 import UsersPage from 'pages/users/index';
-import PostApplyLeaveForm from 'pages/applyLeave/forms/PostApplyLeaveForm.js';
+import PostApplyLeaveForm from 'pages/applyLeave/index';
 import CountriesPage from 'pages/countries/index';
 
 import CountiesPage from 'pages/counties/index';
@@ -15,6 +15,8 @@ import RolesPage from 'pages/roles/index';
 
 // render - dashboard
 const DashboardDefault = Loadable(lazy(() => import('pages/dashboard')));
+const LeaveTypesPageDefault = Loadable(lazy(() => import('pages/leaveTypes')));
+const PostApplyLeaveFormDefault = Loadable(lazy(() => import('pages/applyLeave')));
 
 // render - sample page
 const SamplePage = Loadable(lazy(() => import('pages/extra-pages/SamplePage')));
@@ -43,7 +45,12 @@ const MainRoutes = {
         },
         {
             path: 'leave',
-            element: <PostApplyLeaveForm />,
+            element: <PostApplyLeaveFormDefault />,
+            private: true
+        },
+        {
+            path: 'leaveTypes',
+            element: <LeaveTypesPageDefault />,
             private: true
         },
 

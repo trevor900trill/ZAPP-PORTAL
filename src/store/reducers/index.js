@@ -14,6 +14,7 @@ import counties from './counties';
 import localities from './localities';
 import subcounties from './subcounties';
 import regions from './regions';
+import leaveTypes from './leaveTypes';
 
 // ==============================|| COMBINE REDUCERS ||============================== //
 
@@ -29,7 +30,8 @@ const reducers = combineReducers({
     countries,
     counties,
     subcounties,
-    regions
+    regions,
+    leaveTypes
 });
 
 export default reducers;
