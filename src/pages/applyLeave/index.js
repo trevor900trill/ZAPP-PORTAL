@@ -1,5 +1,5 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect, forwardRef } from 'react';
+import { useDispatch, useSelector, connect } from 'react-redux';
 
 // material-ui
 import {
@@ -18,6 +18,7 @@ import {
 
 import { useTheme } from '@mui/material/styles';
 import Select from '@mui/material/Select';
+import { useNavigate } from 'react-router-dom';
 
 // third party
 import * as Yup from 'yup';
@@ -25,28 +26,44 @@ import { Formik, Field } from 'formik';
 
 // project import
 import AnimateButton from 'components/@extended/AnimateButton';
-import { addcounties } from 'store/reducers/counties';
+import { addLeaveApplications } from 'store/reducers/LeaveApplications';
 import { getCurrentTime } from 'store/ip';
 import { logOut } from 'store/reducers/accounts';
-import { fetchcounties } from 'store/reducers/counties';
+import { fetchLeaveApplications } from 'store/reducers/LeaveApplications';
 import MainCard from 'components/MainCard';
+import { fetchleaveTypes } from 'store/reducers/leaveTypes';
 
 // assets
 
-const PostApplyLeaveForm = ({ close }) => {
+const PostApplyLeaveForm = () => {
     const theme = useTheme();
 
     const dispatch = useDispatch();
 
     const navigate = useNavigate();
 
-    const regions = useSelector((state) => state.regions);
+    const leaveTypes = useSelector((state) => state.leaveTypes);
 
-    const counties = useSelector((state) => state.counties);
+    const LeaveApplications = useSelector((state) => state.LeaveApplications);
 
     const user = JSON.parse(localStorage.getItem('user'));
 
     const matchDownMD = useMediaQuery(theme.breakpoints.down('md'));
+
+    useEffect(() => {
+        const fetchData = async () => {
+            var t = await dispatch(fetchleaveTypes());
+            if (t.type == 'leaveTypes/fetchleaveTypes/rejected') {
+                console.log(t);
+                if (t.error.message == 'Unauthorized') {
+                    dispatch(logOut());
+                    navigate('/login');
+                }
+            }
+        };
+
+        fetchData();
+    }, [dispatch]);
 
     return (
         <Grid container rowSpacing={4.5} columnSpacing={2.75}>
@@ -63,34 +80,40 @@ const PostApplyLeaveForm = ({ close }) => {
                     </Box>
                     <Formik
                         initialValues={{
-                            tenant: user.tenantid,
+                            tenantId: user.tenantid,
                             createdBy: user.email,
-                            modifiedBy: user.email,
-                            modifiedOn: getCurrentTime(),
-                            isDeleted: false,
-                            applicationUserId: '',
-                            countyName: '',
-                            regionId: ''
+                            createdOn: getCurrentTime(),
+                            applicationUserId: user.applicationUserId,
+                            employeeId: '',
+                            leaveTypePublicId: '',
+                            startDate: '',
+                            endDate: '',
+                            reason: '',
+                            availableDays: '0',
+                            deparment: 'IT',
+                            myHODEmploymentId: user.myHODEmploymentId,
+                            firstName: user.firstname,
+                            lastName: user.lastname
                         }}
                         validationSchema={Yup.object().shape({
-                            StartLeaveDate: Yup.string().max(255).required('Start Leave Date is required'),
-                            EndLeaveDate: Yup.string().max(255).required('End Leave Date is required')
+                            leaveTypePublicId: Yup.string().max(255).required('Start Leave Date is required'),
+                            startDate: Yup.string().max(255).required('Start Leave Date is required'),
+                            endDate: Yup.string().max(255).required('Start Leave Date is required'),
+                            reason: Yup.string().max(255).required('Start Leave Date is required')
                         })}
                         onSubmit={async (values, { setErrors, setStatus, setSubmitting, resetForm }) => {
                             try {
                                 setSubmitting(true);
-                                var t = await dispatch(addcounties(values));
+                                var t = await dispatch(addLeaveApplications(values));
 
                                 setStatus({ success: false });
                                 setSubmitting(false);
 
-                                if (t.type == 'counties/addcounties/fulfilled') {
+                                if (t.type == 'LeaveApplications/addLeaveApplications/fulfilled') {
                                     resetForm();
-                                    close();
-                                    await dispatch(fetchcounties());
                                 }
 
-                                if (t.type == 'counties/addcounties/rejected') {
+                                if (t.type == 'LeaveApplications/addLeaveApplications/rejected') {
                                     if (t.error.message == 'Unauthorized') {
                                         dispatch(logOut());
                                         navigate('/login');
@@ -112,7 +135,7 @@ const PostApplyLeaveForm = ({ close }) => {
                                             <InputLabel htmlFor="firstName">First Name</InputLabel>
                                             <OutlinedInput
                                                 id="firstName"
-                                                type="text"
+                                                type="firstName"
                                                 value={values.firstName}
                                                 name="firstName"
                                                 onBlur={handleBlur}
@@ -146,7 +169,7 @@ const PostApplyLeaveForm = ({ close }) => {
                                                 fullWidth
                                                 id="email"
                                                 type="email"
-                                                value={values.email}
+                                                value={values.createdBy}
                                                 name="email"
                                                 onBlur={handleBlur}
                                                 onChange={handleChange}
@@ -196,21 +219,21 @@ const PostApplyLeaveForm = ({ close }) => {
 
                                     <Grid item xs={12} md={6}>
                                         <Stack spacing={1}>
-                                            <InputLabel htmlFor="startDate">End Date</InputLabel>
+                                            <InputLabel htmlFor="endDate">End Date</InputLabel>
                                             <OutlinedInput
                                                 fullWidth
                                                 id="endDate"
                                                 type="date"
-                                                value={values.startDate}
-                                                name="startDate"
+                                                value={values.endDate}
+                                                name="endDate"
                                                 onBlur={handleBlur}
                                                 onChange={handleChange}
                                                 inputProps={{ min: new Date().toISOString().slice(0, 10) }}
-                                                error={Boolean(touched.startDate && errors.startDate)}
+                                                error={Boolean(touched.endDate && errors.endDate)}
                                             />
-                                            {touched.startDate && errors.startDate && (
-                                                <FormHelperText error id="helper-text-startDate">
-                                                    {errors.startDate}
+                                            {touched.endDate && errors.endDate && (
+                                                <FormHelperText error id="helper-text-endDate">
+                                                    {errors.endDate}
                                                 </FormHelperText>
                                             )}
                                         </Stack>
@@ -218,25 +241,25 @@ const PostApplyLeaveForm = ({ close }) => {
 
                                     <Grid item xs={12} md={6}>
                                         <Stack spacing={1}>
-                                            <InputLabel htmlFor="leaveType">Leave Type</InputLabel>
+                                            <InputLabel htmlFor="leaveTypePublicId">Leave Type</InputLabel>
                                             <Select
-                                                labelId="leaveType"
-                                                id="leaveType"
-                                                name="leaveType"
-                                                error={Boolean(touched.leaveType && errors.leaveType)}
-                                                value={values.leaveType}
+                                                labelId="leaveTypePublicId"
+                                                id="leaveTypePublicId"
+                                                name="leaveTypePublicId"
+                                                error={Boolean(touched.leaveTypePublicId && errors.leaveTypePublicId)}
+                                                value={values.leaveTypePublicId}
                                                 onChange={handleChange}
                                                 fullWidth
                                             >
-                                                {/* {leaveTypes.map((type) => (
-                                            <MenuItem key={type} value={type}>
-                                                {type}
-                                            </MenuItem>
-                                        ))} */}
+                                                {leaveTypes.leaveTypesReponse.map((type) => (
+                                                    <MenuItem key={type.publicId} value={type.publicId}>
+                                                        {type.name}
+                                                    </MenuItem>
+                                                ))}
                                             </Select>
-                                            {touched.leaveType && errors.leaveType && (
-                                                <FormHelperText error id="helper-text-leaveType">
-                                                    {errors.leaveType}
+                                            {touched.leaveTypePublicId && errors.leaveTypePublicId && (
+                                                <FormHelperText error id="helper-text-leaveTypePublicId">
+                                                    {errors.leaveTypePublicId}
                                                 </FormHelperText>
                                             )}
                                         </Stack>
@@ -287,10 +310,10 @@ const PostApplyLeaveForm = ({ close }) => {
                                         </Grid>
                                     )}
 
-                                    {counties.hasError && (
+                                    {LeaveApplications.hasError && (
                                         <Grid item xs={12}>
                                             <Alert severity="error">
-                                                An error occured — <strong>{counties.errorMessage}</strong>
+                                                An error occured — <strong>{LeaveApplications.errorMessage}</strong>
                                             </Alert>
                                         </Grid>
                                     )}

@@ -140,7 +140,7 @@ const TreeNavigation = () => {
                         navigatePage('/leave');
                     }}
                 />
-                <StyledTreeItem
+                {/* <StyledTreeItem
                     nodeId="22"
                     labelText="Leave History"
                     labelIcon={TeamOutlined}
@@ -149,7 +149,7 @@ const TreeNavigation = () => {
                     onClick={() => {
                         navigatePage('/leave');
                     }}
-                />
+                /> */}
                 <StyledTreeItem
                     nodeId="23"
                     labelText="Leave Types"
@@ -160,7 +160,7 @@ const TreeNavigation = () => {
                         navigatePage('/leaveTypes');
                     }}
                 />
-                <StyledTreeItem
+                {/* <StyledTreeItem
                     nodeId="24"
                     labelText="Staff"
                     labelIcon={TeamOutlined}
@@ -169,7 +169,7 @@ const TreeNavigation = () => {
                     onClick={() => {
                         navigatePage('/leave');
                     }}
-                />
+                /> */}
             </StyledTreeItem>
             <StyledTreeItem nodeId="3" labelText="PayRoll" labelIcon={ReadOutlined} color="#e3742f" bgColor="#fcefe3">
                 <StyledTreeItem nodeId="32" labelText="Payslips" labelIcon={SlidersOutlined} color="#e3742f" bgColor="#fcefe3" />

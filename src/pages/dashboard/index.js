@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect, forwardRef } from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch, useSelector, connect } from 'react-redux';
 
 // material-ui
 import {
@@ -32,6 +33,7 @@ import SalesColumnChart from './SalesColumnChart';
 import MainCard from 'components/MainCard';
 import AnalyticEcommerce from 'components/cards/statistics/AnalyticEcommerce';
 import Search from './Search';
+import { fetchleaveDays } from 'store/reducers/leaveDays';
 
 // assets
 import { GiftOutlined, MessageOutlined, SettingOutlined, UserOutlined, DiffOutlined } from '@ant-design/icons';
@@ -100,16 +102,40 @@ const status = [
 const DashboardDefault = () => {
     const theme = useTheme();
 
+    const dispatch = useDispatch();
+
+    const leaveDays = useSelector((state) => state.leaveDays);
+
     const matchDownMD = useMediaQuery(theme.breakpoints.down('md'));
 
     const [value, setValue] = useState('today');
+
     const [slot, setSlot] = useState('week');
 
     const [tabvalue, setTabValue] = useState(0);
 
+    const user = JSON.parse(localStorage.getItem('user'));
+
     const handleChange = (event, newValue) => {
         setTabValue(newValue);
     };
+
+    useEffect(() => {
+        const fetchData = async () => {
+            var t = await dispatch(fetchleaveDays(user.myHODEmploymentId));
+            if (t.type == 'leaveDays/fetchleaveDays/rejected') {
+                console.log(t);
+                if (t.error.message == 'Unauthorized') {
+                    dispatch(logOut());
+                    navigate('/login');
+                }
+            } else {
+                await dispatch(fetchlocations());
+            }
+        };
+
+        fetchData();
+    }, [dispatch]);
 
     return (
         <Grid container rowSpacing={4.5} columnSpacing={2.75}>
@@ -206,7 +232,7 @@ const DashboardDefault = () => {
                                     label="All"
                                     {...a11yProps(0)}
                                 />
-                                <Tab
+                                {/* <Tab
                                     sx={{
                                         display: 'flex',
                                         flexDirection: 'row',
@@ -238,7 +264,7 @@ const DashboardDefault = () => {
                                     }}
                                     label="Drafts"
                                     {...a11yProps(3)}
-                                />
+                                /> */}
                             </Tabs>
                         </Stack>
                     </Box>
@@ -258,7 +284,7 @@ const DashboardDefault = () => {
                                         label="All"
                                         {...a11yProps(0)}
                                     />
-                                    <Tab
+                                    {/* <Tab
                                         sx={{
                                             display: 'flex',
                                             flexDirection: 'row',
@@ -290,7 +316,7 @@ const DashboardDefault = () => {
                                         }}
                                         label="Rejected"
                                         {...a11yProps(3)}
-                                    />
+                                    /> */}
                                 </Tabs>
                             </Grid>
                         </Grid>
@@ -299,24 +325,24 @@ const DashboardDefault = () => {
 
                 <TabPanel value={tabvalue} index={0} dir={theme.direction}>
                     <MainCard sx={{ mt: 2 }} content={false}>
-                        <OrdersTable />
+                        <OrdersTable rows={leaveDays.leaveDaysReponse} />
                     </MainCard>
                 </TabPanel>
-                <TabPanel value={tabvalue} index={1} dir={theme.direction}>
+                {/* <TabPanel value={tabvalue} index={1} dir={theme.direction}>
                     <MainCard sx={{ mt: 2 }} content={false}>
-                        <OrdersTable />
+                        <OrdersTable rows={leaveDays.leaveDaysReponse} />
                     </MainCard>
                 </TabPanel>
                 <TabPanel value={tabvalue} index={2} dir={theme.direction}>
                     <MainCard sx={{ mt: 2 }} content={false}>
-                        <OrdersTable />
+                        <OrdersTable rows={leaveDays.leaveDaysReponse} />
                     </MainCard>
                 </TabPanel>
                 <TabPanel value={tabvalue} index={3} dir={theme.direction}>
                     <MainCard sx={{ mt: 2 }} content={false}>
-                        <OrdersTable />
+                        <OrdersTable rows={leaveDays.leaveDaysReponse} />
                     </MainCard>
-                </TabPanel>
+                </TabPanel> */}
             </Grid>
 
             {/* <Grid item xs={12} md={5} lg={4}>

@@ -1,33 +1,29 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { useDispatch, useSelector, connect } from 'react-redux';
 
 // material-ui
-import { Box, Link, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
+import {
+    Box,
+    Link,
+    Stack,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TablePagination,
+    TableHead,
+    TableRow,
+    Button,
+    CircularProgress,
+    Typography
+} from '@mui/material';
 
 // third-party
-import NumberFormat from 'react-number-format';
-import { RiseOutlined, FallOutlined } from '@ant-design/icons';
 
 // project import
 import Dot from 'components/@extended/Dot';
-
-function createData(trackingNo, name, fat, carbs, protein) {
-    return { trackingNo, name, fat, carbs, protein };
-}
-
-const rows = [
-    // createData(84564564, 'Camera Lens', 40, 2, 40570),
-    // createData(98764564, 'Laptop', 300, 0, 180139),
-    // createData(98756325, 'Mobile', 355, 1, 90989),
-    // createData(98652366, 'Handset', 50, 1, 10239),
-    // createData(13286564, 'Computer Accessories', 100, 1, 83348),
-    // createData(86739658, 'TV', 99, 0, 410780),
-    // createData(13256498, 'Keyboard', 125, 2, 70999),
-    // createData(98753263, 'Mouse', 89, 2, 10570),
-    // createData(98753275, 'Desktop', 185, 1, 98063),
-    // createData(98753291, 'Chair', 100, 0, 14001)
-];
+import leaveDays from 'store/reducers/leaveDays';
 
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -59,40 +55,22 @@ function stableSort(array, comparator) {
 
 const headCells = [
     {
-        id: 'staffName',
+        id: 'name',
         align: 'left',
         disablePadding: false,
-        label: 'Staff Name.'
+        label: 'Name'
     },
     {
-        id: 'leaveType',
+        id: 'description',
         align: 'left',
         disablePadding: true,
-        label: 'Leave Type'
+        label: 'Description'
     },
     {
-        id: 'appliedDate',
+        id: 'days',
         align: 'left',
-        disablePadding: false,
-        label: 'Applied Date'
-    },
-    {
-        id: 'hodStatus',
-        align: 'left',
-        disablePadding: false,
-        label: 'HOD Status'
-    },
-    {
-        id: 'hrStatus',
-        align: 'left',
-        disablePadding: false,
-        label: 'HR Status'
-    },
-    {
-        id: 'action',
-        align: 'left',
-        disablePadding: false,
-        label: 'Action'
+        disablePadding: true,
+        label: 'Days'
     }
 ];
 
@@ -112,6 +90,9 @@ function OrderTableHead({ order, orderBy }) {
                         {headCell.label}
                     </TableCell>
                 ))}
+                {/* <TableCell key="Actions" align="left" padding="none">
+                    Actions
+                </TableCell> */}
             </TableRow>
         </TableHead>
     );
@@ -122,50 +103,29 @@ OrderTableHead.propTypes = {
     orderBy: PropTypes.string
 };
 
-// ==============================|| ORDER TABLE - STATUS ||============================== //
-
-const OrderStatus = ({ status }) => {
-    let color;
-    let title;
-
-    switch (status) {
-        case 0:
-            color = 'warning';
-            title = 'Pending';
-            break;
-        case 1:
-            color = 'success';
-            title = 'Approved';
-            break;
-        case 2:
-            color = 'error';
-            title = 'Rejected';
-            break;
-        default:
-            color = 'primary';
-            title = 'None';
-    }
-
-    return (
-        <Stack direction="row" spacing={1} alignItems="center">
-            <Dot color={color} />
-            <Typography>{title}</Typography>
-        </Stack>
-    );
-};
-
-OrderStatus.propTypes = {
-    status: PropTypes.number
-};
-
 // ==============================|| ORDER TABLE ||============================== //
 
-export default function OrderTable() {
+const OrdersTable = ({ rows, modalOpen }) => {
     const [order] = useState('asc');
-    const [orderBy] = useState('trackingNo');
     const [selected] = useState([]);
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(5);
+    const leaveDays = useSelector((state) => state.leaveDays);
 
-    const isSelected = (trackingNo) => selected.indexOf(trackingNo) !== -1;
+    function createData(name, description, publicId, days) {
+        return { name, description, publicId, days };
+    }
+
+    const datarows = rows.map((element) => createData(element.name, element.description, element.publicId, element.days));
+
+    const handleChangePage = (event, newPage) => {
+        setPage(newPage);
+    };
+
+    const handleChangeRowsPerPage = (event) => {
+        setRowsPerPage(parseInt(event.target.value, 10));
+        setPage(0);
+    };
 
     return (
         <Box>
@@ -190,39 +150,46 @@ export default function OrderTable() {
                         }
                     }}
                 >
-                    <OrderTableHead order={order} orderBy={orderBy} />
-
+                    <OrderTableHead order={order} />
                     <TableBody>
-                        {rows.length != 0 ? (
-                            stableSort(rows, getComparator(order, orderBy)).map((row, index) => {
-                                const isItemSelected = isSelected(row.trackingNo);
-                                const labelId = `enhanced-table-checkbox-${index}`;
-                                return (
-                                    <TableRow
-                                        hover
-                                        role="checkbox"
-                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                        aria-checked={isItemSelected}
-                                        tabIndex={-1}
-                                        key={row.trackingNo}
-                                        selected={isItemSelected}
-                                    >
-                                        <TableCell component="th" id={labelId} scope="row" align="left">
-                                            <Link color="secondary" component={RouterLink} to="">
-                                                {row.trackingNo}
-                                            </Link>
-                                        </TableCell>
-                                        <TableCell align="left">{row.name}</TableCell>
-                                        <TableCell align="left">{row.fat}</TableCell>
-                                        <TableCell align="left">
-                                            <OrderStatus status={row.carbs} />
-                                        </TableCell>
-                                        <TableCell align="left">
-                                            <NumberFormat value={row.protein} displayType="text" thousandSeparator prefix="$" />
-                                        </TableCell>
-                                    </TableRow>
-                                );
-                            })
+                        {leaveDays.isLoading ? (
+                            <TableRow>
+                                <TableCell colSpan={7} align="center">
+                                    <CircularProgress />
+                                </TableCell>
+                            </TableRow>
+                        ) : datarows.length != 0 ? (
+                            stableSort(datarows, getComparator(order))
+                                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                .map((row, index) => {
+                                    return (
+                                        <TableRow
+                                            hover
+                                            role="checkbox"
+                                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                            tabIndex={-1}
+                                            key={row.publicId}
+                                        >
+                                            <TableCell align="left">{row.name}</TableCell>
+                                            <TableCell align="left">{row.description}</TableCell>
+                                            <TableCell align="left">{row.days}</TableCell>
+                                            {/* <TableCell align="left">
+                                                <Stack direction="row" alignItems="center" spacing={1}>
+                                                    <Button
+                                                        disableElevation
+                                                        variant="outlined"
+                                                        size="medium"
+                                                        onClick={() => {
+                                                            modalOpen(row);
+                                                        }}
+                                                    >
+                                                        Edit
+                                                    </Button>{' '}
+                                                </Stack>
+                                            </TableCell> */}
+                                        </TableRow>
+                                    );
+                                })
                         ) : (
                             <TableRow>
                                 <TableCell colSpan={7} align="center">
@@ -233,6 +200,17 @@ export default function OrderTable() {
                     </TableBody>
                 </Table>
             </TableContainer>
+            <TablePagination
+                rowsPerPageOptions={[5, 10, 25]}
+                component="div"
+                count={datarows.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+            />
         </Box>
     );
-}
+};
+
+export default OrdersTable;
