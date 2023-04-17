@@ -4,28 +4,10 @@ import { lazy } from 'react';
 import Loadable from 'components/Loadable';
 import MainLayout from 'layout/MainLayout';
 
-import UsersPage from 'pages/users/index';
-import PostApplyLeaveForm from 'pages/applyLeave/index';
 import CountriesPage from 'pages/countries/index';
-
-import CountiesPage from 'pages/counties/index';
-import SubCountiesPage from 'pages/subCounties/index';
-import RegionsPage from 'pages/regions/index';
-import RolesPage from 'pages/roles/index';
 
 // render - dashboard
 const DashboardDefault = Loadable(lazy(() => import('pages/dashboard')));
-const LeaveTypesPageDefault = Loadable(lazy(() => import('pages/leaveTypes')));
-const PostApplyLeaveFormDefault = Loadable(lazy(() => import('pages/applyLeave')));
-
-// render - sample page
-const SamplePage = Loadable(lazy(() => import('pages/extra-pages/SamplePage')));
-
-// render - utilities
-const Typography = Loadable(lazy(() => import('pages/components-overview/Typography')));
-const Color = Loadable(lazy(() => import('pages/components-overview/Color')));
-const Shadow = Loadable(lazy(() => import('pages/components-overview/Shadow')));
-const AntIcons = Loadable(lazy(() => import('pages/components-overview/AntIcons')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -38,70 +20,10 @@ const MainRoutes = {
             element: <DashboardDefault />,
             private: true
         },
-        {
-            path: 'users',
-            element: <UsersPage />,
-            private: true
-        },
-        {
-            path: 'leave',
-            element: <PostApplyLeaveFormDefault />,
-            private: true
-        },
-        {
-            path: 'leaveTypes',
-            element: <LeaveTypesPageDefault />,
-            private: true
-        },
 
         {
             path: 'countries',
             element: <CountriesPage />,
-            private: true
-        },
-        {
-            path: 'counties',
-            element: <CountiesPage />,
-            private: true
-        },
-        {
-            path: 'subcounties',
-            element: <SubCountiesPage />,
-            private: true
-        },
-        {
-            path: 'regions',
-            element: <RegionsPage />,
-            private: true
-        },
-        {
-            path: 'roles',
-            element: <RolesPage />,
-            private: true
-        },
-        {
-            path: 'color',
-            element: <Color />,
-            private: true
-        },
-        {
-            path: 'sample-page',
-            element: <SamplePage />,
-            private: true
-        },
-        {
-            path: 'shadow',
-            element: <Shadow />,
-            private: true
-        },
-        {
-            path: 'typography',
-            element: <Typography />,
-            private: true
-        },
-        {
-            path: 'icons/ant',
-            element: <AntIcons />,
             private: true
         }
     ]

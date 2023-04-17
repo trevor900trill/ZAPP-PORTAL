@@ -123,58 +123,38 @@ const TreeNavigation = () => {
                 nodeId="1"
                 labelText="Dashboard"
                 labelIcon={DashboardOutlined}
-                color="#e3742f"
-                bgColor="#fcefe3"
+                color="#075E54"
+                bgColor="#e6f4ea"
                 onClick={() => {
                     navigatePage('/');
                 }}
             />
-            <StyledTreeItem nodeId="2" labelText="Leave" labelIcon={IdcardOutlined} color="#e3742f" bgColor="#fcefe3">
+            {/* <StyledTreeItem nodeId="2" labelText="Leave" labelIcon={IdcardOutlined} color="#075E54" bgColor="#e6f4ea">
                 <StyledTreeItem
                     nodeId="21"
                     labelText="Apply Leave"
                     labelIcon={SlidersOutlined}
-                    color="#e3742f"
-                    bgColor="#fcefe3"
+                    color="#075E54"
+                    bgColor="#e6f4ea"
                     onClick={() => {
                         navigatePage('/leave');
                     }}
                 />
-                {/* <StyledTreeItem
-                    nodeId="22"
-                    labelText="Leave History"
-                    labelIcon={TeamOutlined}
-                    color="#e3742f"
-                    bgColor="#fcefe3"
-                    onClick={() => {
-                        navigatePage('/leave');
-                    }}
-                /> */}
                 <StyledTreeItem
                     nodeId="23"
                     labelText="Leave Types"
                     labelIcon={TeamOutlined}
-                    color="#e3742f"
-                    bgColor="#fcefe3"
+                    color="#075E54"
+                    bgColor="#e6f4ea"
                     onClick={() => {
                         navigatePage('/leaveTypes');
                     }}
                 />
-                {/* <StyledTreeItem
-                    nodeId="24"
-                    labelText="Staff"
-                    labelIcon={TeamOutlined}
-                    color="#e3742f"
-                    bgColor="#fcefe3"
-                    onClick={() => {
-                        navigatePage('/leave');
-                    }}
-                /> */}
             </StyledTreeItem>
-            <StyledTreeItem nodeId="3" labelText="PayRoll" labelIcon={ReadOutlined} color="#e3742f" bgColor="#fcefe3">
-                <StyledTreeItem nodeId="32" labelText="Payslips" labelIcon={SlidersOutlined} color="#e3742f" bgColor="#fcefe3" />
-                <StyledTreeItem nodeId="33" labelText="Update Information" labelIcon={WalletOutlined} color="#e3742f" bgColor="#fcefe3" />
-            </StyledTreeItem>
+            <StyledTreeItem nodeId="3" labelText="PayRoll" labelIcon={ReadOutlined} color="#075E54" bgColor="#e6f4ea">
+                <StyledTreeItem nodeId="32" labelText="Payslips" labelIcon={SlidersOutlined} color="#075E54" bgColor="#e6f4ea" />
+                <StyledTreeItem nodeId="33" labelText="Update Information" labelIcon={WalletOutlined} color="#075E54" bgColor="#e6f4ea" />
+            </StyledTreeItem> */}
         </TreeView>
     );
 };

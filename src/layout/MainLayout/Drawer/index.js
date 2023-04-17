@@ -30,7 +30,7 @@ const MainDrawer = ({ open, handleDrawerToggle, window }) => {
             {!matchDownMD ? (
                 <MiniDrawerStyled variant="permanent" open={open}>
                     {drawerHeader}
-                    <Divider variant="middle" />
+                    {/* <Divider variant="middle" /> */}
                     {drawerContent}
                 </MiniDrawerStyled>
             ) : (

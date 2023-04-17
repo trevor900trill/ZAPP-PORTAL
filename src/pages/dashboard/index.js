@@ -146,16 +146,16 @@ const DashboardDefault = () => {
                 </Typography>
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
-                <AnalyticEcommerce title="All Applied Leave" count="5" />
+                <AnalyticEcommerce title="Registered Users" count="5" />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
-                <AnalyticEcommerce title="Approved Leave(s)" count="3" />
+                <AnalyticEcommerce title="Completed Orders" count="3" />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
-                <AnalyticEcommerce title="Pending" count="1" />
+                <AnalyticEcommerce title="Total Earnings" count="1" />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
-                <AnalyticEcommerce title="Rejected" count="0" />
+                <AnalyticEcommerce title="Today's Earnings" count="0" />
             </Grid>
 
             <Grid item md={8} sx={{ display: { sm: 'none', md: 'block', lg: 'none' } }} />
