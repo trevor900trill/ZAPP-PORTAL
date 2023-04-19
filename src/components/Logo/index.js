@@ -21,7 +21,6 @@ const LogoSection = ({ sx, to }) => (
                     label={process.env.REACT_APP_VERSION}
                     size="small"
                     sx={{ height: 16, bgcolor: '#ffffff', '& .MuiChip-label': { fontSize: '0.625rem', py: 0.25 } }}
-                    component="a"
                 />
             </Stack>
         </MainCard>

@@ -33,7 +33,7 @@ import SalesColumnChart from './SalesColumnChart';
 import MainCard from 'components/MainCard';
 import AnalyticEcommerce from 'components/cards/statistics/AnalyticEcommerce';
 import Search from './Search';
-import { fetchleaveDays } from 'store/reducers/leaveDays';
+import { fetchdashboard } from 'store/reducers/dashboard';
 
 // assets
 import { GiftOutlined, MessageOutlined, SettingOutlined, UserOutlined, DiffOutlined } from '@ant-design/icons';
@@ -104,7 +104,7 @@ const DashboardDefault = () => {
 
     const dispatch = useDispatch();
 
-    const leaveDays = useSelector((state) => state.leaveDays);
+    const dashboard = useSelector((state) => state.dashboard);
 
     const matchDownMD = useMediaQuery(theme.breakpoints.down('md'));
 
@@ -122,15 +122,13 @@ const DashboardDefault = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            var t = await dispatch(fetchleaveDays(user.myHODEmploymentId));
-            if (t.type == 'leaveDays/fetchleaveDays/rejected') {
+            var t = await dispatch(fetchdashboard(user.myHODEmploymentId));
+            if (t.type == 'dashboard/fetchdashboard/rejected') {
                 console.log(t);
                 if (t.error.message == 'Unauthorized') {
                     dispatch(logOut());
                     navigate('/login');
                 }
-            } else {
-                await dispatch(fetchlocations());
             }
         };
 
@@ -146,16 +144,16 @@ const DashboardDefault = () => {
                 </Typography>
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
-                <AnalyticEcommerce title="Registered Users" count="5" />
+                <AnalyticEcommerce title="Registered Users" count={dashboard.dashboardReponse.noOfUsers} />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
-                <AnalyticEcommerce title="Completed Orders" count="3" />
+                <AnalyticEcommerce title="Completed Orders" count={dashboard.dashboardReponse.noOfCompleteOrders} />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
-                <AnalyticEcommerce title="Total Earnings" count="1" />
+                <AnalyticEcommerce title="Total Earnings" count={dashboard.dashboardReponse.totalEarnings} />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
-                <AnalyticEcommerce title="Today's Earnings" count="0" />
+                <AnalyticEcommerce title="Today's Earnings" count={dashboard.dashboardReponse.todaysEarnings} />
             </Grid>
 
             <Grid item md={8} sx={{ display: { sm: 'none', md: 'block', lg: 'none' } }} />
@@ -229,7 +227,7 @@ const DashboardDefault = () => {
                                         alignItems: 'center',
                                         textTransform: 'capitalize'
                                     }}
-                                    label="All"
+                                    label="All Users"
                                     {...a11yProps(0)}
                                 />
                                 {/* <Tab
@@ -281,7 +279,7 @@ const DashboardDefault = () => {
                                             alignItems: 'center',
                                             textTransform: 'capitalize'
                                         }}
-                                        label="All"
+                                        label="All Users"
                                         {...a11yProps(0)}
                                     />
                                     {/* <Tab
@@ -325,22 +323,22 @@ const DashboardDefault = () => {
 
                 <TabPanel value={tabvalue} index={0} dir={theme.direction}>
                     <MainCard sx={{ mt: 2 }} content={false}>
-                        <OrdersTable rows={leaveDays.leaveDaysReponse} />
+                        <OrdersTable rows={dashboard.dashboardReponse} />
                     </MainCard>
                 </TabPanel>
                 {/* <TabPanel value={tabvalue} index={1} dir={theme.direction}>
                     <MainCard sx={{ mt: 2 }} content={false}>
-                        <OrdersTable rows={leaveDays.leaveDaysReponse} />
+                        <OrdersTable rows={dashboard.dashboardReponse} />
                     </MainCard>
                 </TabPanel>
                 <TabPanel value={tabvalue} index={2} dir={theme.direction}>
                     <MainCard sx={{ mt: 2 }} content={false}>
-                        <OrdersTable rows={leaveDays.leaveDaysReponse} />
+                        <OrdersTable rows={dashboard.dashboardReponse} />
                     </MainCard>
                 </TabPanel>
                 <TabPanel value={tabvalue} index={3} dir={theme.direction}>
                     <MainCard sx={{ mt: 2 }} content={false}>
-                        <OrdersTable rows={leaveDays.leaveDaysReponse} />
+                        <OrdersTable rows={dashboard.dashboardReponse} />
                     </MainCard>
                 </TabPanel> */}
             </Grid>

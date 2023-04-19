@@ -23,7 +23,7 @@ import {
 
 // project import
 import Dot from 'components/@extended/Dot';
-import leaveDays from 'store/reducers/leaveDays';
+import dashboard from 'store/reducers/dashboard';
 
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -58,19 +58,19 @@ const headCells = [
         id: 'name',
         align: 'left',
         disablePadding: false,
-        label: 'Name'
+        label: 'Full Name'
     },
     {
-        id: 'description',
+        id: 'phoneNumber',
         align: 'left',
         disablePadding: true,
-        label: 'Description'
+        label: 'Phone Number'
     },
     {
-        id: 'days',
+        id: 'walletId',
         align: 'left',
         disablePadding: true,
-        label: 'Days'
+        label: 'Wallet'
     }
 ];
 
@@ -110,13 +110,13 @@ const OrdersTable = ({ rows, modalOpen }) => {
     const [selected] = useState([]);
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
-    const leaveDays = useSelector((state) => state.leaveDays);
+    const dashboard = useSelector((state) => state.dashboard);
 
-    function createData(name, description, publicId, days) {
-        return { name, description, publicId, days };
+    function createData(name, phoneNumber, walletId, id) {
+        return { name, phoneNumber, walletId, id };
     }
 
-    const datarows = rows.map((element) => createData(element.name, element.description, element.publicId, element.days));
+    const datarows = rows.users.map((element) => createData(element.fullName, element.phoneNumber, element.walletId, element.id));
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -152,7 +152,7 @@ const OrdersTable = ({ rows, modalOpen }) => {
                 >
                     <OrderTableHead order={order} />
                     <TableBody>
-                        {leaveDays.isLoading ? (
+                        {dashboard.isLoading ? (
                             <TableRow>
                                 <TableCell colSpan={7} align="center">
                                     <CircularProgress />
@@ -168,11 +168,11 @@ const OrdersTable = ({ rows, modalOpen }) => {
                                             role="checkbox"
                                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                             tabIndex={-1}
-                                            key={row.publicId}
+                                            key={row.id}
                                         >
                                             <TableCell align="left">{row.name}</TableCell>
-                                            <TableCell align="left">{row.description}</TableCell>
-                                            <TableCell align="left">{row.days}</TableCell>
+                                            <TableCell align="left">{row.phoneNumber}</TableCell>
+                                            <TableCell align="left">{row.walletId}</TableCell>
                                             {/* <TableCell align="left">
                                                 <Stack direction="row" alignItems="center" spacing={1}>
                                                     <Button

@@ -1,6 +1,4 @@
-export const url = 'https://lm.qwikpace.com/api/v1';
-
-//export const url = 'http://a90689165673642adb46ae8886bc24b2-989850680.us-east-2.elb.amazonaws.com/api';
+export const url = 'https://prod.zapp.co.ke/portal';
 
 export const loginHeaders = () => {
     return {
@@ -12,7 +10,7 @@ export const getHeaders = () => {
     const t = JSON.parse(localStorage.getItem('user'));
     return {
         'Accept-Type': 'application/json',
-        Authorization: 'Bearer ' + t.token
+        Authorization: 'Bearer ' + t.access_token
     };
 };
 
@@ -20,7 +18,7 @@ export const postHeaders = () => {
     const t = JSON.parse(localStorage.getItem('user'));
     return {
         'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + t.token
+        Authorization: 'Bearer ' + t.access_token
     };
 };
 

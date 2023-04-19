@@ -67,10 +67,10 @@ const AuthLogin = () => {
                     try {
                         setSubmitting(true);
                         var t = await dispatch(logIn(values));
-                        console.log(t);
                         setStatus({ success: false });
                         setSubmitting(false);
                         if (t.type == 'accounts/logIn/fulfilled') {
+                            localStorage.setItem('email', values.username);
                             navigate('/');
                         }
                     } catch (err) {
@@ -142,7 +142,7 @@ const AuthLogin = () => {
                             {accounts.hasError && (
                                 <Grid item xs={12}>
                                     <Alert severity="error">
-                                        An error occured — <strong>{accounts.errorMessage}</strong>
+                                        <strong>{accounts.errorMessage}</strong>
                                     </Alert>
                                 </Grid>
                             )}

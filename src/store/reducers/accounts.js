@@ -8,31 +8,18 @@ export const logIn = createAsyncThunk('accounts/logIn', async (body) => {
         method: 'POST',
         body: JSON.stringify(body)
     };
-    const response = await fetch(url + '/Authenticate/login', params);
-    const data = await response.json();
+    const response = await fetch(url + '/login', params);
     if (response.status == 200) {
+        const data = await response.json();
         return data;
     } else if (response.status == 401) {
         throw new Error('Invalid email or password');
     } else {
-        throw new Error(data.message);
+        const responseBody = await response.text();
+        throw new Error(responseBody);
     }
 });
 
-export const register = createAsyncThunk('accounts/register', async (body) => {
-    const params = {
-        headers: loginHeaders(),
-        method: 'POST',
-        body: JSON.stringify(body)
-    };
-    const response = await fetch(url + '/Authenticate/register', params);
-    const data = await response.json();
-    if (response.status == 200 || response.status == 201) {
-        return data;
-    } else {
-        throw new Error(data.message);
-    }
-});
 // ==============================|| SLICE - ACCOUNTS ||============================== //
 
 const accounts = createSlice({
@@ -53,14 +40,6 @@ const accounts = createSlice({
             };
         });
         builder.addCase(logIn.rejected, (state, action) => {
-            return {
-                ...state,
-                hasError: true,
-                errorMessage: action.error.message,
-                user: null
-            };
-        });
-        builder.addCase(register.rejected, (state, action) => {
             return {
                 ...state,
                 hasError: true,

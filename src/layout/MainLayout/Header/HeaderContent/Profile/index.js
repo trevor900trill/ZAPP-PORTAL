@@ -13,6 +13,7 @@ import {
     ClickAwayListener,
     Grid,
     IconButton,
+    Icon,
     Paper,
     Popper,
     Stack,
@@ -84,6 +85,8 @@ const Profile = () => {
         setValue(newValue);
     };
 
+    const currentEmail = localStorage.getItem('email');
+
     const iconBackColorOpen = 'grey.300';
 
     return (
@@ -103,7 +106,10 @@ const Profile = () => {
             >
                 <Stack direction="row" spacing={2} alignItems="center" sx={{ p: 0.5 }}>
                     <Avatar alt="profile user" src={avatar1} sx={{ width: 32, height: 32 }} />
-                    <Typography variant="subtitle1">John Doe</Typography>
+                    {/* <Icon>
+                        <UserOutlined />
+                    </Icon> */}
+                    <Typography variant="subtitle1">Super Admin</Typography>
                 </Stack>
             </ButtonBase>
             <Popper
@@ -146,9 +152,9 @@ const Profile = () => {
                                                     <Stack direction="row" spacing={1.25} alignItems="center">
                                                         <Avatar alt="profile user" src={avatar1} sx={{ width: 32, height: 32 }} />
                                                         <Stack>
-                                                            <Typography variant="h6">John Doe</Typography>
+                                                            <Typography variant="h6">Super Admin</Typography>
                                                             <Typography variant="body2" color="textSecondary">
-                                                                johndoe@gmail.com
+                                                                {currentEmail}
                                                             </Typography>
                                                         </Stack>
                                                     </Stack>
