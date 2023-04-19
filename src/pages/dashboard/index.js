@@ -1,6 +1,7 @@
 import { useState, useEffect, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector, connect } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 // material-ui
 import {
@@ -34,6 +35,7 @@ import MainCard from 'components/MainCard';
 import AnalyticEcommerce from 'components/cards/statistics/AnalyticEcommerce';
 import Search from './Search';
 import { fetchdashboard } from 'store/reducers/dashboard';
+import { logOut } from 'store/reducers/accounts';
 
 // assets
 import { GiftOutlined, MessageOutlined, SettingOutlined, UserOutlined, DiffOutlined } from '@ant-design/icons';
@@ -101,6 +103,8 @@ const status = [
 
 const DashboardDefault = () => {
     const theme = useTheme();
+
+    const navigate = useNavigate();
 
     const dispatch = useDispatch();
 
