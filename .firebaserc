@@ -1,5 +1,15 @@
 {
   "projects": {
     "default": "zapp-81e75"
-  }
+  },
+  "targets": {
+    "zapp-81e75": {
+      "hosting": {
+        "portal": [
+          "portal-99999"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }
