@@ -26,7 +26,7 @@ import {
 import { useTheme } from '@mui/material/styles';
 
 // project import
-import OrdersTable from './OrdersTable';
+import UsersTable from './UsersTable';
 import IncomeAreaChart from './IncomeAreaChart';
 import MonthlyBarChart from './MonthlyBarChart';
 import ReportAreaChart from './ReportAreaChart';
@@ -159,6 +159,18 @@ const DashboardDefault = () => {
             <Grid item xs={12} sm={6} md={4} lg={3}>
                 <AnalyticEcommerce title="Today's Earnings" count={dashboard.dashboardReponse.todaysEarnings} />
             </Grid>
+            <Grid item xs={12} sm={6} md={4} lg={3}>
+                <AnalyticEcommerce title="Active Stories" count={dashboard.dashboardReponse.activePostsCount} />
+            </Grid>
+            <Grid item xs={12} sm={6} md={4} lg={3}>
+                <AnalyticEcommerce title="Inactive Stories" count={dashboard.dashboardReponse.inactivePostsCount} />
+            </Grid>
+            <Grid item xs={12} sm={6} md={4} lg={3}>
+                <AnalyticEcommerce title="Traders" count={dashboard.dashboardReponse.zappUsersCount} />
+            </Grid>
+            <Grid item xs={12} sm={6} md={4} lg={3}>
+                <AnalyticEcommerce title="Couriers" count={dashboard.dashboardReponse.zappCourierUsersCount} />
+            </Grid>
 
             <Grid item md={8} sx={{ display: { sm: 'none', md: 'block', lg: 'none' } }} />
 
@@ -275,17 +287,6 @@ const DashboardDefault = () => {
                         <Grid container alignItems="center" justifyContent="space-between">
                             <Grid item>
                                 <Tabs variant="fullWidth" value={tabvalue} onChange={handleChange} aria-label="profile tabs">
-                                    <Tab
-                                        sx={{
-                                            display: 'flex',
-                                            flexDirection: 'row',
-                                            justifyContent: 'center',
-                                            alignItems: 'center',
-                                            textTransform: 'capitalize'
-                                        }}
-                                        label="All Users"
-                                        {...a11yProps(0)}
-                                    />
                                     {/* <Tab
                                         sx={{
                                             display: 'flex',
@@ -294,7 +295,18 @@ const DashboardDefault = () => {
                                             alignItems: 'center',
                                             textTransform: 'capitalize'
                                         }}
-                                        label="Approved"
+                                        label="All"
+                                        {...a11yProps(0)}
+                                    /> */}
+                                    <Tab
+                                        sx={{
+                                            display: 'flex',
+                                            flexDirection: 'row',
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
+                                            textTransform: 'capitalize'
+                                        }}
+                                        label="Traders"
                                         {...a11yProps(1)}
                                     />
                                     <Tab
@@ -305,46 +317,30 @@ const DashboardDefault = () => {
                                             alignItems: 'center',
                                             textTransform: 'capitalize'
                                         }}
-                                        label="Pending"
+                                        label="Couriers"
                                         {...a11yProps(2)}
                                     />
-                                    <Tab
-                                        sx={{
-                                            display: 'flex',
-                                            flexDirection: 'row',
-                                            justifyContent: 'center',
-                                            alignItems: 'center',
-                                            textTransform: 'capitalize'
-                                        }}
-                                        label="Rejected"
-                                        {...a11yProps(3)}
-                                    /> */}
                                 </Tabs>
                             </Grid>
                         </Grid>
                     </Box>
                 )}
 
-                <TabPanel value={tabvalue} index={0} dir={theme.direction}>
+                {/* <TabPanel value={tabvalue} index={0} dir={theme.direction}>
                     <MainCard sx={{ mt: 2 }} content={false}>
-                        <OrdersTable rows={dashboard.dashboardReponse} />
-                    </MainCard>
-                </TabPanel>
-                {/* <TabPanel value={tabvalue} index={1} dir={theme.direction}>
-                    <MainCard sx={{ mt: 2 }} content={false}>
-                        <OrdersTable rows={dashboard.dashboardReponse} />
-                    </MainCard>
-                </TabPanel>
-                <TabPanel value={tabvalue} index={2} dir={theme.direction}>
-                    <MainCard sx={{ mt: 2 }} content={false}>
-                        <OrdersTable rows={dashboard.dashboardReponse} />
-                    </MainCard>
-                </TabPanel>
-                <TabPanel value={tabvalue} index={3} dir={theme.direction}>
-                    <MainCard sx={{ mt: 2 }} content={false}>
-                        <OrdersTable rows={dashboard.dashboardReponse} />
+                        <UsersTable rows={dashboard.dashboardReponse.users} />
                     </MainCard>
                 </TabPanel> */}
+                <TabPanel value={tabvalue} index={0} dir={theme.direction}>
+                    <MainCard sx={{ mt: 2 }} content={false}>
+                        <UsersTable rows={dashboard.dashboardReponse.zappUsers} />
+                    </MainCard>
+                </TabPanel>
+                <TabPanel value={tabvalue} index={1} dir={theme.direction}>
+                    <MainCard sx={{ mt: 2 }} content={false}>
+                        <UsersTable rows={dashboard.dashboardReponse.zappCourierUsers} />
+                    </MainCard>
+                </TabPanel>
             </Grid>
 
             {/* <Grid item xs={12} md={5} lg={4}>

@@ -27,11 +27,17 @@ const dashboard = createSlice({
         isLoading: false,
         errorMessage: '',
         dashboardReponse: {
-            NoOfCompleteOrders: 0,
-            NoOfUsers: 0,
-            TotalEarnings: 0,
-            TodaysEarnings: 0,
-            users: []
+            noOfCompleteOrders: 0,
+            noOfUsers: 0,
+            totalEarnings: 0,
+            todaysEarnings: 0,
+            activePostsCount: 0,
+            inactivePostsCount: 0,
+            zappUsersCount: 0,
+            zappCourierUsersCount: 0,
+            users: [],
+            zappUsers: [],
+            zappCourierUsers: []
         }
     },
     extraReducers: (builder) => {
@@ -50,11 +56,17 @@ const dashboard = createSlice({
                 isLoading: false,
                 errorMessage: action.error.message,
                 dashboardReponse: {
-                    NoOfCompleteOrders: 0,
-                    NoOfUsers: 0,
-                    TotalEarnings: 0,
-                    TodaysEarnings: 0,
-                    users: []
+                    noOfCompleteOrders: 0,
+                    noOfUsers: 0,
+                    totalEarnings: 0,
+                    todaysEarnings: 0,
+                    activePostsCount: 0,
+                    inactivePostsCount: 0,
+                    zappUsersCount: 0,
+                    zappCourierUsersCount: 0,
+                    users: [],
+                    zappUsers: [],
+                    zappCourierUsers: []
                 }
             };
         });

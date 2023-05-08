@@ -105,7 +105,7 @@ OrderTableHead.propTypes = {
 
 // ==============================|| ORDER TABLE ||============================== //
 
-const OrdersTable = ({ rows, modalOpen }) => {
+const UsersTable = ({ rows, modalOpen }) => {
     const [order] = useState('asc');
     const [selected] = useState([]);
     const [page, setPage] = useState(0);
@@ -116,7 +116,7 @@ const OrdersTable = ({ rows, modalOpen }) => {
         return { name, phoneNumber, walletId, id };
     }
 
-    const datarows = rows.users.map((element) => createData(element.fullName, element.phoneNumber, element.walletId, element.id));
+    const datarows = rows.map((element) => createData(element.fullName, element.phoneNumber, element.walletId, element.id));
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -213,4 +213,4 @@ const OrdersTable = ({ rows, modalOpen }) => {
     );
 };
 
-export default OrdersTable;
+export default UsersTable;

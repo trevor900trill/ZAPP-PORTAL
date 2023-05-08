@@ -1,4 +1,8 @@
+//PROD URL
 export const url = 'https://prod.zapp.co.ke/portal';
+
+//LOCAL URL
+// export const url = 'http://192.168.0.30:5000/portal';
 
 export const loginHeaders = () => {
     return {
