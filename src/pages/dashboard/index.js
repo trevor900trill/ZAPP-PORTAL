@@ -235,7 +235,7 @@ const DashboardDefault = () => {
                             <Search sx={{ width: '100%' }} />
 
                             <Tabs variant="fullWidth" value={tabvalue} onChange={handleChange} aria-label="profile tabs">
-                                <Tab
+                                {/* <Tab
                                     sx={{
                                         display: 'flex',
                                         flexDirection: 'row',
@@ -245,8 +245,8 @@ const DashboardDefault = () => {
                                     }}
                                     label="All Users"
                                     {...a11yProps(0)}
-                                />
-                                {/* <Tab
+                                /> */}
+                                <Tab
                                     sx={{
                                         display: 'flex',
                                         flexDirection: 'row',
@@ -254,31 +254,20 @@ const DashboardDefault = () => {
                                         alignItems: 'center',
                                         textTransform: 'capitalize'
                                     }}
-                                    label="Active"
+                                    label="Traders"
+                                    {...a11yProps(0)}
+                                />
+                                <Tab
+                                    sx={{
+                                        display: 'flex',
+                                        flexDirection: 'row',
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        textTransform: 'capitalize'
+                                    }}
+                                    label="Couriers"
                                     {...a11yProps(1)}
                                 />
-                                <Tab
-                                    sx={{
-                                        display: 'flex',
-                                        flexDirection: 'row',
-                                        justifyContent: 'center',
-                                        alignItems: 'center',
-                                        textTransform: 'capitalize'
-                                    }}
-                                    label="Pending"
-                                    {...a11yProps(2)}
-                                />
-                                <Tab
-                                    sx={{
-                                        display: 'flex',
-                                        flexDirection: 'row',
-                                        justifyContent: 'center',
-                                        alignItems: 'center',
-                                        textTransform: 'capitalize'
-                                    }}
-                                    label="Drafts"
-                                    {...a11yProps(3)}
-                                /> */}
                             </Tabs>
                         </Stack>
                     </Box>
@@ -307,7 +296,7 @@ const DashboardDefault = () => {
                                             textTransform: 'capitalize'
                                         }}
                                         label="Traders"
-                                        {...a11yProps(1)}
+                                        {...a11yProps(0)}
                                     />
                                     <Tab
                                         sx={{
@@ -318,7 +307,7 @@ const DashboardDefault = () => {
                                             textTransform: 'capitalize'
                                         }}
                                         label="Couriers"
-                                        {...a11yProps(2)}
+                                        {...a11yProps(1)}
                                     />
                                 </Tabs>
                             </Grid>
