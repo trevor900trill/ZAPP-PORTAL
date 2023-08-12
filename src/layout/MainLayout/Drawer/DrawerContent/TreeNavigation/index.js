@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 
 import {
     DashboardOutlined,
+    ShopOutlined,
     SettingOutlined,
     TeamOutlined,
     CaretDownOutlined,
@@ -127,6 +128,16 @@ const TreeNavigation = () => {
                 bgColor="#e6f4ea"
                 onClick={() => {
                     navigatePage('/');
+                }}
+            />
+            <StyledTreeItem
+                nodeId="2"
+                labelText="Shops"
+                labelIcon={ShopOutlined}
+                color="#075E54"
+                bgColor="#e6f4ea"
+                onClick={() => {
+                    navigatePage('shops');
                 }}
             />
             {/* <StyledTreeItem nodeId="2" labelText="Leave" labelIcon={IdcardOutlined} color="#075E54" bgColor="#e6f4ea">

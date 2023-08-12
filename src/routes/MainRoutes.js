@@ -5,6 +5,7 @@ import Loadable from 'components/Loadable';
 import MainLayout from 'layout/MainLayout';
 
 import CountriesPage from 'pages/countries/index';
+import ShopsPage from 'pages/shops/index';
 
 // render - dashboard
 const DashboardDefault = Loadable(lazy(() => import('pages/dashboard')));
@@ -20,7 +21,11 @@ const MainRoutes = {
             element: <DashboardDefault />,
             private: true
         },
-
+        {
+            path: 'shops',
+            element: <ShopsPage />,
+            private: true
+        },
         {
             path: 'countries',
             element: <CountriesPage />,
