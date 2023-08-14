@@ -38,19 +38,6 @@ const AddShops = ({ close }) => {
     const users = useSelector((state) => state.users);
     const shops = useSelector((state) => state.shops);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            var t = await dispatch(fetchusers());
-            if (t.type == 'users/fetchusers/rejected') {
-                if (t.error.message == 'Unauthorized') {
-                    dispatch(logOut());
-                    navigate('/login');
-                }
-            }
-        };
-        fetchData();
-    }, [dispatch]);
-
     return (
         <>
             <Typography variant="h4" color="primary" align="center" sx={{ marginTop: 3 }}>

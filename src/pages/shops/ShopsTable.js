@@ -92,7 +92,7 @@ OrderTableHead.propTypes = {
 
 // ==============================|| ORDER TABLE ||============================== //
 
-const ShopsTable = ({ rows, modalOpen, contributorModalOpen }) => {
+const ShopsTable = ({ rows, modalOpen, contributorModalOpen, deleteModalOpen }) => {
     const [order] = useState('asc');
     const [selected] = useState([]);
     const [page, setPage] = useState(0);
@@ -160,7 +160,7 @@ const ShopsTable = ({ rows, modalOpen, contributorModalOpen }) => {
                                             <TableCell align="left">{row.shopName}</TableCell>
                                             <TableCell align="right">
                                                 <Stack direction="row" alignItems="center" justifyContent="flex-end" spacing={1}>
-                                                    <Button
+                                                    {/* <Button
                                                         disableElevation
                                                         variant="outlined"
                                                         size="medium"
@@ -169,14 +169,14 @@ const ShopsTable = ({ rows, modalOpen, contributorModalOpen }) => {
                                                         }}
                                                     >
                                                         Edit
-                                                    </Button>{' '}
+                                                    </Button>{' '} */}
                                                     <Button
                                                         disableElevation
                                                         variant="outlined"
                                                         size="medium"
                                                         color="error"
                                                         onClick={() => {
-                                                            modalOpen(row);
+                                                            deleteModalOpen(row);
                                                         }}
                                                     >
                                                         Delete

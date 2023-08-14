@@ -16,6 +16,7 @@ import {
     Typography
 } from '@mui/material';
 import Select from '@mui/material/Select';
+import MainCard from 'components/MainCard';
 
 // third party
 import * as Yup from 'yup';
@@ -39,31 +40,26 @@ const ViewContributors = ({ close, initialDialogValues }) => {
     const navigate = useNavigate();
     const contributors = useSelector((state) => state.contributors);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            var t = await dispatch(fetchcontributors());
-            if (t.type == 'contributors/fetchcontributors/rejected') {
-                if (t.error.message == 'Unauthorized') {
-                    dispatch(logOut());
-                    navigate('/login');
-                }
-            }
-        };
-        fetchData();
-    }, [dispatch]);
-
     return (
-        <>
-            <Typography variant="h4" color="primary" align="center" sx={{ marginTop: 3 }}>
-                View Contributors
-            </Typography>
+        <Grid container spacing={3}>
+            <Grid item xs={12} md={12}>
+                <Typography variant="h4" color="primary" align="center" sx={{ marginTop: 3 }}>
+                    View Contributors
+                </Typography>
+            </Grid>
 
-            <MainCard sx={{ mt: 2 }} content={false}>
-                <ContributorsTable rows={contributors.contributorsReponse} modalOpen={handleClickEdit} />
-            </MainCard>
+            <Grid item xs={12} md={12}>
+                <MainCard sx={{ mt: 2 }} content={false}>
+                    <ContributorsTable rows={contributors.contributorsReponse} modalOpen={close} />
+                </MainCard>
+            </Grid>
 
-            <Button onClick={close}>Cancel</Button>
-        </>
+            <Grid item xs={12}>
+                <Stack direction="row" spacing={1} alignItems="center" justifyContent="flex-end">
+                    <Button onClick={close}>Close</Button>
+                </Stack>
+            </Grid>
+        </Grid>
     );
 };
 

@@ -38,7 +38,20 @@ export const editshops = createAsyncThunk('shops/editshops', async (body) => {
         method: 'PUT',
         body: JSON.stringify(body)
     };
-    const response = await fetch(url + '/Country/UpdateCountry/' + body.id, params);
+    const response = await fetch(url + '/editShop', params);
+    if (response.status == 200 || response.status == 201 || response.status == 204) {
+        return null;
+    } else {
+        throw new Error(data.message);
+    }
+});
+
+export const deleteshop = createAsyncThunk('shops/deleteshop', async (id) => {
+    const params = {
+        headers: postHeaders(),
+        method: 'DELETE'
+    };
+    const response = await fetch(url + '/deleteShop/' + id, params);
     if (response.status == 200 || response.status == 201 || response.status == 204) {
         return null;
     } else {
@@ -118,6 +131,28 @@ const shops = createSlice({
             };
         });
         builder.addCase(editshops.pending, (state, action) => {
+            return {
+                ...state,
+                isLoading: true
+            };
+        });
+
+        builder.addCase(deleteshop.rejected, (state, action) => {
+            return {
+                ...state,
+                hasError: true,
+                isLoading: false,
+                errorMessage: action.error.message
+            };
+        });
+        builder.addCase(deleteshop.fulfilled, (state, action) => {
+            return {
+                ...state,
+                hasError: false,
+                isLoading: false
+            };
+        });
+        builder.addCase(deleteshop.pending, (state, action) => {
             return {
                 ...state,
                 isLoading: true

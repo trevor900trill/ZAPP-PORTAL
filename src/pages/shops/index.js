@@ -38,6 +38,7 @@ import Search from '../dashboard/Search';
 import ShopsTable from './ShopsTable';
 import { fetchshops } from 'store/reducers/shops';
 import { fetchusers } from 'store/reducers/users';
+import { fetchcontributors } from 'store/reducers/contributors';
 
 import AddShops from './dialogs/AddShops';
 import EditShops from './dialogs/EditShops';
@@ -45,6 +46,8 @@ import ViewContributors from './dialogs/ViewContributors';
 // assets
 import { GiftOutlined, MessageOutlined, SettingOutlined, UserOutlined, DiffOutlined } from '@ant-design/icons';
 import { logOut } from 'store/reducers/accounts';
+import DeleteShop from './dialogs/DeleteShop';
+import AddContributor from './dialogs/AddContributor';
 
 const Transition = forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -81,17 +84,43 @@ const ShopsPage = () => {
 
     const handleClickOpen = async () => {
         setOpen(true);
+        var t = await dispatch(fetchusers());
+        if (t.type == 'users/fetchusers/rejected') {
+            if (t.error.message == 'Unauthorized') {
+                dispatch(logOut());
+                navigate('/login');
+            }
+        }
     };
 
     const handleClose = () => {
         setOpen(false);
     };
 
+    const [deleteopen, setDeleteOpen] = useState(false);
+
+    const handleDeleteClickOpen = async (initialValues) => {
+        setInitialValues(initialValues);
+        setDeleteOpen(true);
+    };
+
+    const handleDeleteClose = () => {
+        setDeleteOpen(false);
+        setInitialValues(null);
+    };
+
     const [editopen, setEditOpen] = useState(false);
 
-    const handleClickEdit = (initialValues) => {
+    const handleClickEdit = async (initialValues) => {
         setInitialValues(initialValues);
         setEditOpen(true);
+        var t = await dispatch(fetchusers());
+        if (t.type == 'users/fetchusers/rejected') {
+            if (t.error.message == 'Unauthorized') {
+                dispatch(logOut());
+                navigate('/login');
+            }
+        }
     };
 
     const handleEditClose = () => {
@@ -99,11 +128,35 @@ const ShopsPage = () => {
         setInitialValues(null);
     };
 
+    const [addContributoropen, setAddContributorOpen] = useState(false);
+
+    const handleClickAddContributor = async () => {
+        setAddContributorOpen(true);
+        var t = await dispatch(fetchusers());
+        if (t.type == 'users/fetchusers/rejected') {
+            if (t.error.message == 'Unauthorized') {
+                dispatch(logOut());
+                navigate('/login');
+            }
+        }
+    };
+
+    const handleAddContributorClose = () => {
+        setAddContributorOpen(false);
+    };
+
     const [contributorsopen, setContributorsOpen] = useState(false);
 
-    const handleClickContributor = (initialValues) => {
+    const handleClickContributor = async (initialValues) => {
         setInitialValues(initialValues);
         setContributorsOpen(true);
+        var t = await dispatch(fetchcontributors(initialValues.id));
+        if (t.type == 'contributors/fetchcontributors/rejected') {
+            if (t.error.message == 'Unauthorized') {
+                dispatch(logOut());
+                navigate('/login');
+            }
+        }
     };
 
     const handleContributorClose = () => {
@@ -148,7 +201,7 @@ const ShopsPage = () => {
             </Dialog>
 
             <Dialog
-                open={editopen}
+                open={contributorsopen}
                 onClose={handleContributorClose}
                 scroll="body"
                 fullScreen={matchDownMD}
@@ -157,6 +210,32 @@ const ShopsPage = () => {
             >
                 <DialogContent>
                     <ViewContributors close={handleContributorClose} initialDialogValues={initialDialogValues} />
+                </DialogContent>
+            </Dialog>
+
+            <Dialog
+                open={addContributoropen}
+                onClose={handleAddContributorClose}
+                scroll="body"
+                fullScreen={matchDownMD}
+                TransitionComponent={Transition}
+                keepMounted
+            >
+                <DialogContent>
+                    <AddContributor close={handleAddContributorClose} />
+                </DialogContent>
+            </Dialog>
+
+            <Dialog
+                open={deleteopen}
+                onClose={handleDeleteClose}
+                scroll="body"
+                fullScreen={matchDownMD}
+                TransitionComponent={Transition}
+                keepMounted
+            >
+                <DialogContent>
+                    <DeleteShop close={handleDeleteClose} initialDialogValues={initialDialogValues} />
                 </DialogContent>
             </Dialog>
 
@@ -171,7 +250,12 @@ const ShopsPage = () => {
                             <Button sx={{ width: '100%' }} variant="contained" onClick={handleClickOpen} startIcon={<DiffOutlined />}>
                                 Add Shop
                             </Button>
-                            <Button sx={{ width: '100%' }} variant="contained" onClick={handleClickOpen} startIcon={<DiffOutlined />}>
+                            <Button
+                                sx={{ width: '100%' }}
+                                variant="contained"
+                                onClick={handleClickAddContributor}
+                                startIcon={<DiffOutlined />}
+                            >
                                 Map Contributor
                             </Button>
                         </Stack>
@@ -187,8 +271,8 @@ const ShopsPage = () => {
                                 <Button variant="contained" onClick={handleClickOpen} startIcon={<DiffOutlined />}>
                                     Add Shop
                                 </Button>
-                                <Button variant="contained" onClick={handleClickOpen} startIcon={<DiffOutlined />}>
-                                    Add Mapping
+                                <Button variant="contained" onClick={handleClickAddContributor} startIcon={<DiffOutlined />}>
+                                    Map Contributor
                                 </Button>
                             </Stack>
                         </Stack>
@@ -196,7 +280,12 @@ const ShopsPage = () => {
                 )}
 
                 <MainCard sx={{ mt: 2 }} content={false}>
-                    <ShopsTable rows={shops.shopsReponse} modalOpen={handleClickEdit} contributorModalOpen={handleClickContributor} />
+                    <ShopsTable
+                        rows={shops.shopsReponse}
+                        modalOpen={handleClickEdit}
+                        contributorModalOpen={handleClickContributor}
+                        deleteModalOpen={handleDeleteClickOpen}
+                    />
                 </MainCard>
             </Grid>
         </Grid>

@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { useDispatch, useSelector, connect } from 'react-redux';
+import { deletecontributors } from 'store/reducers/contributors';
 
 // material-ui
 import {
@@ -104,12 +105,15 @@ const ContributorsTable = ({ rows, modalOpen }) => {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const contributors = useSelector((state) => state.contributors);
+    const dispatch = useDispatch();
 
-    function createData(fullName, phoneNumber, id) {
-        return { fullName, phoneNumber, id };
+    function createData(fullName, phoneNumber, id, shopId) {
+        return { fullName, phoneNumber, id, shopId };
     }
 
-    const datarows = rows.map((element) => createData(element.fullName, element.phoneNumber, element.id));
+    const datarows = rows.map((element) =>
+        createData(element.user.fullName, element.user.phoneNumber, element.user.id, element.contributor.shopId)
+    );
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -118,6 +122,30 @@ const ContributorsTable = ({ rows, modalOpen }) => {
     const handleChangeRowsPerPage = (event) => {
         setRowsPerPage(parseInt(event.target.value, 10));
         setPage(0);
+    };
+
+    const handleDeleteContributor = async (data) => {
+        try {
+            var t = await dispatch(
+                deletecontributors({
+                    id: data.id,
+                    shopId: data.shopId
+                })
+            );
+            if (t.type == 'shops/deletecontributors/fulfilled') {
+                close();
+                await dispatch(fetchshops());
+            }
+
+            if (t.type == 'shops/deletecontributors/rejected') {
+                if (t.error.message == 'Unauthorized') {
+                    dispatch(logOut());
+                    navigate('/login');
+                }
+            }
+        } catch (err) {
+            console.error(err);
+        }
     };
 
     return (
@@ -173,7 +201,7 @@ const ContributorsTable = ({ rows, modalOpen }) => {
                                                         size="medium"
                                                         color="error"
                                                         onClick={() => {
-                                                            modalOpen(row);
+                                                            handleDeleteContributor(row);
                                                         }}
                                                     >
                                                         Remove

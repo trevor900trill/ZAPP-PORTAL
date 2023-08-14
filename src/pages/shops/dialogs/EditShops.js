@@ -28,7 +28,7 @@ import { getCurrentTime } from 'store/ip';
 import { logOut } from 'store/reducers/accounts';
 import { fetchusers } from 'store/reducers/users';
 import { fetchshops } from 'store/reducers/shops';
-import { addshops } from 'store/reducers/shops';
+import { editshops } from 'store/reducers/shops';
 
 import { useEffect } from 'react';
 
@@ -40,19 +40,6 @@ const EditShops = ({ close, initialDialogValues }) => {
     const users = useSelector((state) => state.users);
     const shops = useSelector((state) => state.shops);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            var t = await dispatch(fetchusers());
-            if (t.type == 'users/fetchusers/rejected') {
-                if (t.error.message == 'Unauthorized') {
-                    dispatch(logOut());
-                    navigate('/login');
-                }
-            }
-        };
-        fetchData();
-    }, [dispatch]);
-
     return (
         <>
             <Typography variant="h4" color="primary" align="center" sx={{ marginTop: 3 }}>
@@ -61,8 +48,10 @@ const EditShops = ({ close, initialDialogValues }) => {
             {initialDialogValues && (
                 <Formik
                     initialValues={{
+                        id: initialDialogValues.Id,
                         ownerId: initialDialogValues.ownerId,
-                        shopName: initialDialogValues.shopName
+                        shopName: initialDialogValues.shopName,
+                        timestamp: initialDialogValues.Timestamp
                     }}
                     validationSchema={Yup.object().shape({
                         shopName: Yup.string().max(255).required('Shop Name is required'),
@@ -71,18 +60,18 @@ const EditShops = ({ close, initialDialogValues }) => {
                     onSubmit={async (values, { setErrors, setStatus, setSubmitting, resetForm }) => {
                         try {
                             setSubmitting(true);
-                            var t = await dispatch(addshops(values));
+                            var t = await dispatch(editshops(values));
 
                             setStatus({ success: false });
                             setSubmitting(false);
 
-                            if (t.type == 'shops/addshops/fulfilled') {
+                            if (t.type == 'shops/editshops/fulfilled') {
                                 resetForm();
                                 close();
                                 await dispatch(fetchshops());
                             }
 
-                            if (t.type == 'shops/addshops/rejected') {
+                            if (t.type == 'shops/editshops/rejected') {
                                 if (t.error.message == 'Unauthorized') {
                                     dispatch(logOut());
                                     navigate('/login');

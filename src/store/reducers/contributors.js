@@ -2,12 +2,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { url, getHeaders, postHeaders } from 'store/ip';
 
-export const fetchcontributors = createAsyncThunk('contributors/fetchcontributors', async () => {
+export const fetchcontributors = createAsyncThunk('contributors/fetchcontributors', async (id) => {
     const params = {
         headers: getHeaders(''),
         method: 'GET'
     };
-    const response = await fetch(url + '/contributors', params);
+    const response = await fetch(url + '/contributors/' + id, params);
     if (response.status == 200) {
         const data = await response.json();
         return data;
@@ -24,7 +24,7 @@ export const addcontributors = createAsyncThunk('contributors/addcontributors', 
         method: 'POST',
         body: JSON.stringify(body)
     };
-    const response = await fetch(url + '/addShop', params);
+    const response = await fetch(url + '/addContributor', params);
     if (response.status == 200 || response.status == 201) {
         return null;
     } else {
@@ -32,13 +32,13 @@ export const addcontributors = createAsyncThunk('contributors/addcontributors', 
     }
 });
 
-export const editcontributors = createAsyncThunk('contributors/editcontributors', async (body) => {
+export const deletecontributors = createAsyncThunk('contributors/deletecontributors', async (body) => {
     const params = {
         headers: postHeaders(),
-        method: 'PUT',
+        method: 'DELETE',
         body: JSON.stringify(body)
     };
-    const response = await fetch(url + '/Country/UpdateCountry/' + body.id, params);
+    const response = await fetch(url + '/removeContributor?id=' + body.id + '&shopId=' + body.shopId, params);
     if (response.status == 200 || response.status == 201 || response.status == 204) {
         return null;
     } else {
@@ -102,7 +102,7 @@ const contributors = createSlice({
             };
         });
 
-        builder.addCase(editcontributors.rejected, (state, action) => {
+        builder.addCase(deletecontributors.rejected, (state, action) => {
             return {
                 ...state,
                 hasError: true,
@@ -110,14 +110,14 @@ const contributors = createSlice({
                 errorMessage: action.error.message
             };
         });
-        builder.addCase(editcontributors.fulfilled, (state, action) => {
+        builder.addCase(deletecontributors.fulfilled, (state, action) => {
             return {
                 ...state,
                 hasError: false,
                 isLoading: false
             };
         });
-        builder.addCase(editcontributors.pending, (state, action) => {
+        builder.addCase(deletecontributors.pending, (state, action) => {
             return {
                 ...state,
                 isLoading: true
