@@ -25,6 +25,7 @@ import {
     BankOutlined,
     CaretRightOutlined,
     DollarOutlined,
+    EnvironmentOutlined,
     CarOutlined,
     ReadOutlined,
     SafetyCertificateOutlined,
@@ -138,6 +139,16 @@ const TreeNavigation = () => {
                 bgColor="#e6f4ea"
                 onClick={() => {
                     navigatePage('shops');
+                }}
+            />
+            <StyledTreeItem
+                nodeId="3"
+                labelText="Locations"
+                labelIcon={EnvironmentOutlined}
+                color="#075E54"
+                bgColor="#e6f4ea"
+                onClick={() => {
+                    navigatePage('locations');
                 }}
             />
             {/* <StyledTreeItem nodeId="2" labelText="Leave" labelIcon={IdcardOutlined} color="#075E54" bgColor="#e6f4ea">

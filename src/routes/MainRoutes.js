@@ -9,6 +9,8 @@ import ShopsPage from 'pages/shops/index';
 
 // render - dashboard
 const DashboardDefault = Loadable(lazy(() => import('pages/dashboard')));
+const ShopsDefault = Loadable(lazy(() => import('pages/shops')));
+const LocationsDefault = Loadable(lazy(() => import('pages/locations')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -23,7 +25,12 @@ const MainRoutes = {
         },
         {
             path: 'shops',
-            element: <ShopsPage />,
+            element: <ShopsDefault />,
+            private: true
+        },
+        {
+            path: 'locations',
+            element: <LocationsDefault />,
             private: true
         },
         {

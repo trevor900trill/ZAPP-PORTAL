@@ -10,6 +10,7 @@ import dashboard from './dashboard';
 import shops from './shops';
 import users from './users';
 import contributors from './contributors';
+import locations from './locations';
 // ==============================|| COMBINE REDUCERS ||============================== //
 
 const reducers = combineReducers({
@@ -20,7 +21,8 @@ const reducers = combineReducers({
     dashboard,
     shops,
     contributors,
-    users
+    users,
+    locations
 });
 
 export default reducers;

@@ -38,6 +38,7 @@ import Search from '../dashboard/Search';
 import ShopsTable from './ShopsTable';
 import { fetchshops } from 'store/reducers/shops';
 import { fetchusers } from 'store/reducers/users';
+import { fetchlocations } from 'store/reducers/locations';
 import { fetchcontributors } from 'store/reducers/contributors';
 
 import AddShops from './dialogs/AddShops';
@@ -78,6 +79,8 @@ const ShopsPage = () => {
 
     const shops = useSelector((state) => state.shops);
 
+    const locations = useSelector((state) => state.locations);
+
     const [initialDialogValues, setInitialValues] = useState(null);
 
     const [open, setOpen] = useState(false);
@@ -87,6 +90,14 @@ const ShopsPage = () => {
         var t = await dispatch(fetchusers());
         if (t.type == 'users/fetchusers/rejected') {
             if (t.error.message == 'Unauthorized') {
+                dispatch(logOut());
+                navigate('/login');
+            }
+        }
+
+        var l = await dispatch(fetchlocations());
+        if (l.type == 'locations/fetchlocations/rejected') {
+            if (l.error.message == 'Unauthorized') {
                 dispatch(logOut());
                 navigate('/login');
             }

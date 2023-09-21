@@ -37,6 +37,7 @@ const AddShops = ({ close }) => {
     const navigate = useNavigate();
     const users = useSelector((state) => state.users);
     const shops = useSelector((state) => state.shops);
+    const locations = useSelector((state) => state.locations);
 
     return (
         <>
@@ -47,11 +48,13 @@ const AddShops = ({ close }) => {
             <Formik
                 initialValues={{
                     ownerId: '',
-                    shopName: ''
+                    shopName: '',
+                    locationId: ''
                 }}
                 validationSchema={Yup.object().shape({
                     shopName: Yup.string().max(255).required('Shop Name is required'),
-                    ownerId: Yup.string().max(255).required('Owner is required')
+                    ownerId: Yup.string().max(255).required('Owner is required'),
+                    locationId: Yup.string().max(255).required('Location is required')
                 })}
                 onSubmit={async (values, { setErrors, setStatus, setSubmitting, resetForm }) => {
                     try {
@@ -105,6 +108,48 @@ const AddShops = ({ close }) => {
                                     )}
                                 </Stack>
                             </Grid>
+
+                            <Grid item xs={12} md={12}>
+                                <Stack spacing={1}>
+                                    <InputLabel htmlFor="locationId-signup">Location*</InputLabel>
+                                    <Autocomplete
+                                        id="locationId-autocomplete"
+                                        name="locationId"
+                                        options={locations.locationsReponse}
+                                        getOptionLabel={(option) => `${option.locationName}`}
+                                        // value={values.ownerId}
+                                        disabled={locations.isLoading}
+                                        value={locations.locationsReponse.find((locations) => locations.id === locations.id) || null}
+                                        onChange={(event, newValue) => {
+                                            handleChange({
+                                                target: {
+                                                    name: 'locationId',
+                                                    value: newValue ? newValue.id : '' // Assuming `id` is the property that holds the selected value
+                                                }
+                                            });
+                                        }}
+                                        renderInput={(params) => (
+                                            <TextField
+                                                {...params}
+                                                variant="outlined"
+                                                error={Boolean(touched.locationId && errors.locationId)}
+                                                inputProps={{
+                                                    ...params.inputProps,
+                                                    placeholder: locations.isLoading ? 'Loading...' : 'Select a location'
+                                                }}
+                                            />
+                                        )}
+                                        renderOption={(props, option) => <li {...props}>{option.locationName}</li>}
+                                    />
+
+                                    {touched.locationId && errors.locationId && (
+                                        <FormHelperText error id="helper-text-company-signup">
+                                            {errors.locationId}
+                                        </FormHelperText>
+                                    )}
+                                </Stack>
+                            </Grid>
+
                             <Grid item xs={12} md={12}>
                                 <Stack spacing={1}>
                                     <InputLabel htmlFor="ownerId-signup">Owner*</InputLabel>
