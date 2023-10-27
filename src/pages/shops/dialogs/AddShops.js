@@ -18,6 +18,10 @@ import {
     Typography
 } from '@mui/material';
 import Select from '@mui/material/Select';
+import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 
 // third party
 import * as Yup from 'yup';
@@ -49,12 +53,17 @@ const AddShops = ({ close }) => {
                 initialValues={{
                     ownerId: '',
                     shopName: '',
-                    locationId: ''
+                    locationId: '',
+                    active: true,
+                    shopOpenTime: '',
+                    shopCloseTime: ''
                 }}
                 validationSchema={Yup.object().shape({
                     shopName: Yup.string().max(255).required('Shop Name is required'),
                     ownerId: Yup.string().max(255).required('Owner is required'),
-                    locationId: Yup.string().max(255).required('Location is required')
+                    locationId: Yup.string().max(255).required('Location is required'),
+                    shopOpenTime: Yup.string().max(255).required('Open TIme is required'),
+                    shopCloseTime: Yup.string().max(255).required('Close TIme is required')
                 })}
                 onSubmit={async (values, { setErrors, setStatus, setSubmitting, resetForm }) => {
                     try {
@@ -190,6 +199,48 @@ const AddShops = ({ close }) => {
                                     {touched.ownerId && errors.ownerId && (
                                         <FormHelperText error id="helper-text-company-signup">
                                             {errors.ownerId}
+                                        </FormHelperText>
+                                    )}
+                                </Stack>
+                            </Grid>
+
+                            <Grid item xs={12} md={6}>
+                                <Stack spacing={1}>
+                                    <InputLabel htmlFor="shopOpenTime-signup">Open Time*</InputLabel>
+                                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                        <DemoContainer components={['TimePicker']}>
+                                            <TimePicker
+                                                value={values.shopOpenTime}
+                                                onChange={(newValue) => {
+                                                    setFieldValue('shopOpenTime', newValue.$d);
+                                                }}
+                                            />
+                                        </DemoContainer>
+                                    </LocalizationProvider>
+                                    {touched.shopOpenTime && errors.shopOpenTime && (
+                                        <FormHelperText error id="helper-text-company-signup">
+                                            {errors.shopOpenTime}
+                                        </FormHelperText>
+                                    )}
+                                </Stack>
+                            </Grid>
+
+                            <Grid item xs={12} md={6}>
+                                <Stack spacing={1}>
+                                    <InputLabel htmlFor="shopCloseTime-signup">Close Time*</InputLabel>
+                                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                        <DemoContainer components={['TimePicker']}>
+                                            <TimePicker
+                                                value={values.shopCloseTime}
+                                                onChange={(newValue) => {
+                                                    setFieldValue('shopCloseTime', newValue.$d);
+                                                }}
+                                            />
+                                        </DemoContainer>
+                                    </LocalizationProvider>
+                                    {touched.shopCloseTime && errors.shopCloseTime && (
+                                        <FormHelperText error id="helper-text-company-signup">
+                                            {errors.shopCloseTime}
                                         </FormHelperText>
                                     )}
                                 </Stack>
