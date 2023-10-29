@@ -47,6 +47,7 @@ const AddContributor = ({ close }) => {
             <Formik
                 initialValues={{
                     userId: '',
+                    active: true,
                     shopId: ''
                 }}
                 validationSchema={Yup.object().shape({
