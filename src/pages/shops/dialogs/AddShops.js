@@ -54,7 +54,6 @@ const AddShops = ({ close }) => {
                     ownerId: '',
                     shopName: '',
                     locationId: '',
-                    active: true,
                     shopOpenTime: '',
                     shopCloseTime: ''
                 }}
@@ -68,7 +67,7 @@ const AddShops = ({ close }) => {
                 onSubmit={async (values, { setErrors, setStatus, setSubmitting, resetForm }) => {
                     try {
                         setSubmitting(true);
-                        var t = await dispatch(addshops(values));
+                        var t = await dispatch(addshops({ active: true, ...values }));
 
                         setStatus({ success: false });
                         setSubmitting(false);
