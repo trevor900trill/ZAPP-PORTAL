@@ -1,5 +1,8 @@
 //PROD URL
-export const url = 'https://prod.zapp.co.ke/portal';
+// export const url = 'https://prod.zapp.co.ke/portal';
+
+//LB URL
+export const url = 'http://ZAPP-LB-2068967697.us-east-1.elb.amazonaws.com/portal';
 
 //LOCAL URL
 // export const url = 'http://192.168.0.30:5000/portal';

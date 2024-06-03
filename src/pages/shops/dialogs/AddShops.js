@@ -212,7 +212,8 @@ const AddShops = ({ close }) => {
                                             <TimePicker
                                                 value={values.shopOpenTime}
                                                 onChange={(newValue) => {
-                                                    setFieldValue('shopOpenTime', newValue.$d);
+                                                    console.log(newValue);
+                                                    setFieldValue('shopOpenTime', newValue);
                                                 }}
                                             />
                                         </DemoContainer>
@@ -233,7 +234,7 @@ const AddShops = ({ close }) => {
                                             <TimePicker
                                                 value={values.shopCloseTime}
                                                 onChange={(newValue) => {
-                                                    setFieldValue('shopCloseTime', newValue.$d);
+                                                    setFieldValue('shopCloseTime', newValue);
                                                 }}
                                             />
                                         </DemoContainer>
